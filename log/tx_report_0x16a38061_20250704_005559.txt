@@ -1,0 +1,53 @@
+
+=== 交易追踪分析报告 ===
+
+基本信息:
+- 交易哈希: 0x16a3806192c8983581f1fb1abda0e0ee2bca51e3b8320bd65841c5a9979f6a26
+- 区块号: 22839949
+- 总Gas使用: 431,784
+- 交易位置: 259
+
+调用统计:
+- 总调用数: 10
+- 调用类型分布: {'call': 3, 'staticcall': 3, 'delegatecall': 4}
+- 总转账金额: 2.352000 ETH
+
+Gas分析:
+- 总Gas消耗: 2,350,826
+- 平均每次调用Gas: 235,082
+
+涉及地址数量: 11
+价值转移次数: 6
+函数调用次数: 10
+
+=== 详细调用链 ===
+0. call: 0xf43e8c65... -> 0x3154cf16...
+   函数: depositTransaction(address,uint256,uint64,bool,bytes)
+   Gas: 431,784, 价值: 0.392000 ETH
+  1. staticcall: 0x3154cf16... -> 0x0475cbca...
+     函数: paused()
+     Gas: 2,347, 价值: 0.000000 ETH
+  2. delegatecall: 0x3154cf16... -> 0x0b09ba35...
+     函数: depositTransaction(address,uint256,uint64,bool,bytes)
+     Gas: 419,009, 价值: 0.392000 ETH
+    3. call: 0x3154cf16... -> 0x866e82a6...
+       函数: relayMessage(uint256,address,address,uint256,uint256,bytes)
+       Gas: 397,042, 价值: 0.392000 ETH
+      4. staticcall: 0x866e82a6... -> 0x8efb6b5c...
+         函数: resolve(bytes32)
+         Gas: 3,213, 价值: 0.000000 ETH
+      5. delegatecall: 0x866e82a6... -> 0x5d5a0956...
+         函数: relayMessage(uint256,address,address,uint256,uint256,bytes)
+         Gas: 383,408, 价值: 0.392000 ETH
+        6. call: 0x866e82a6... -> 0x49048044...
+           函数: sendMessage(address,bytes,uint32)
+           Gas: 354,096, 价值: 0.392000 ETH
+          7. delegatecall: 0x49048044... -> 0xb443da3e...
+             函数: sendMessage(address,bytes,uint32)
+             Gas: 348,996, 价值: 0.392000 ETH
+            8. staticcall: 0x49048044... -> 0x73a79fab...
+               函数: config()
+               Gas: 7,969, 价值: 0.000000 ETH
+              9. delegatecall: 0x73a79fab... -> 0x78ffe920...
+                 函数: config()
+                 Gas: 2,962, 价值: 0.000000 ETH
