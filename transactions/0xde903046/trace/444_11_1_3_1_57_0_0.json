@@ -1,0 +1,20 @@
+{
+  "trace_index": 444,
+  "trace_address": [
+    11,
+    1,
+    3,
+    1,
+    57,
+    0,
+    0
+  ],
+  "call_type": "delegatecall",
+  "from": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+  "to": "0x2ce6311ddae708829bc0784c967b7d77d19fd779",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x0000000000000000000000000000000000000000000000000000000000000001",
+  "subtraces": 0,
+  "decoded_input": "transfer(address=0x98e938899902217465f17cf0b76d12b3dca8ce1b,uint256=19400000000000)"
+}

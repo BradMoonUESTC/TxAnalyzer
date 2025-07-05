@@ -1,0 +1,41 @@
+{
+  "networks": {
+    "ethereum": {
+      "name": "Ethereum Mainnet",
+      "rpc_url": "你的以太坊RPC_URL",
+      "etherscan_api_key": "你的Etherscan_API_KEY",
+      "etherscan_base_url": "https://api.etherscan.io/v2/api",
+      "chain_id": 1
+    },
+    "base": {
+      "name": "Base Mainnet",
+      "rpc_url": "你的Base_RPC_URL",
+      "etherscan_api_key": "你的BaseScan_API_KEY",
+      "etherscan_base_url": "https://api.basescan.org/api",
+      "chain_id": 8453
+    },
+    "polygon": {
+      "name": "Polygon Mainnet",
+      "rpc_url": "你的Polygon_RPC_URL",
+      "etherscan_api_key": "你的PolygonScan_API_KEY",
+      "etherscan_base_url": "https://api.polygonscan.com/api",
+      "chain_id": 137
+    },
+    "arbitrum": {
+      "name": "Arbitrum One",
+      "rpc_url": "你的Arbitrum_RPC_URL",
+      "etherscan_api_key": "你的Arbiscan_API_KEY",
+      "etherscan_base_url": "https://api.arbiscan.io/api",
+      "chain_id": 42161
+    },
+    "optimism": {
+      "name": "Optimism Mainnet",
+      "rpc_url": "你的Optimism_RPC_URL",
+      "etherscan_api_key": "你的Optimistic_Etherscan_API_KEY",
+      "etherscan_base_url": "https://api-optimistic.etherscan.io/api",
+      "chain_id": 10
+    }
+  },
+  "default_network": "base",
+  "comment": "配置文件模板 - 请替换为实际的API密钥和RPC URL"
+} 

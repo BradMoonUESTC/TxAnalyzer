@@ -1,0 +1,23 @@
+{
+  "session_id": "demo_session",
+  "exported_at": "2025-07-05T22:40:55.622928",
+  "total_llm_responses": 2,
+  "llm_responses": [
+    {
+      "timestamp": "2025-07-05T22:40:55.622708",
+      "type": "llm",
+      "response": "你好！我是AI助手，很高兴为您服务。",
+      "metadata": {
+        "model": "demo"
+      }
+    },
+    {
+      "timestamp": "2025-07-05T22:40:55.622714",
+      "type": "llm",
+      "response": "好的，请提供交易的trace文件，我将帮您分析。",
+      "metadata": {
+        "task": "attack_analysis"
+      }
+    }
+  ]
+}

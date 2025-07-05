@@ -1,0 +1,14 @@
+{
+  "trace_index": 1892,
+  "trace_address": [
+    12
+  ],
+  "call_type": "staticcall",
+  "from": "0x98e938899902217465f17cf0b76d12b3dca8ce1b",
+  "to": "0xd0b53d9277642d899df5c87a3966a349a798f224",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x0000000000000000000000004200000000000000000000000000000000000006",
+  "subtraces": 0,
+  "decoded_input": "amarettoIdealist()"
+}

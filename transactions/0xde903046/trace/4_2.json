@@ -1,0 +1,13 @@
+{
+  "trace_index": 4,
+  "trace_address": [
+    2
+  ],
+  "call_type": "staticcall",
+  "from": "0x98e938899902217465f17cf0b76d12b3dca8ce1b",
+  "to": "0xa68f6075ae62ebd514d1600cb5035fa0e2210ef8",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x000000000000000000000000d0b53d9277642d899df5c87a3966a349a798f224",
+  "subtraces": 1
+}

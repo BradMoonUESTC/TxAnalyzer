@@ -1,0 +1,19 @@
+{
+  "trace_index": 1883,
+  "trace_address": [
+    11,
+    1,
+    3,
+    1,
+    244,
+    2
+  ],
+  "call_type": "call",
+  "from": "0xd0b53d9277642d899df5c87a3966a349a798f224",
+  "to": "0x98e938899902217465f17cf0b76d12b3dca8ce1b",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x",
+  "subtraces": 1,
+  "decoded_input": "uniswapV3SwapCallback(int256=10921226074968110,int256=-19760825,bytes=0x0000000000000000000000004200000000000000000000000000000000000006000000000000000000000000833589fcd6edb6e08f4c7c32d4f71b54bda02913)"
+}

@@ -1,0 +1,39 @@
+{
+  "session_id": "demo_session",
+  "created_at": "2025-07-05T22:40:55.622728",
+  "total_messages": 4,
+  "conversation_history": [
+    {
+      "timestamp": "2025-07-05T22:40:55.622703",
+      "type": "user",
+      "message": "你好，这是一个测试消息",
+      "metadata": {
+        "test": true
+      }
+    },
+    {
+      "timestamp": "2025-07-05T22:40:55.622708",
+      "type": "llm",
+      "response": "你好！我是AI助手，很高兴为您服务。",
+      "metadata": {
+        "model": "demo"
+      }
+    },
+    {
+      "timestamp": "2025-07-05T22:40:55.622712",
+      "type": "user",
+      "message": "请帮我分析一个攻击交易",
+      "metadata": {
+        "task": "attack_analysis"
+      }
+    },
+    {
+      "timestamp": "2025-07-05T22:40:55.622714",
+      "type": "llm",
+      "response": "好的，请提供交易的trace文件，我将帮您分析。",
+      "metadata": {
+        "task": "attack_analysis"
+      }
+    }
+  ]
+}
