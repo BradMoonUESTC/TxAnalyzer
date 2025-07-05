@@ -726,14 +726,14 @@ if __name__ == "__main__":
     # analyzer = TransactionTraceAnalyzer()
     
     # 或者显式指定网络
-    analyzer = TransactionTraceAnalyzer(network='base')    # 使用Base网络
+    analyzer = TransactionTraceAnalyzer(network='bsc')    # 使用Base网络
     # analyzer = TransactionTraceAnalyzer(network='ethereum') # 使用以太坊网络
     
     # 也可以在运行时切换网络
     # analyzer.switch_network('ethereum')  # 切换到以太坊网络
     
     # 示例交易哈希 - 请替换为实际的交易哈希
-    tx_hash = "0xde903046b5cdf27a5391b771f41e645e9cc670b649f7b87b1524fc4076f45983"
+    tx_hash = "0x2d9c1a00cf3d2fda268d0d11794ad2956774b156355e16441d6edb9a448e5a99"
     
     # 获取并解析交易追踪数据
     print("正在获取交易追踪数据...")

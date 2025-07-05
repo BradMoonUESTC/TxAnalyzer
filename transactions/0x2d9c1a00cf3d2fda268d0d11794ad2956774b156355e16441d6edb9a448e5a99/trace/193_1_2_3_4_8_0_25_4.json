@@ -1,0 +1,21 @@
+{
+  "trace_index": 193,
+  "trace_address": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    0,
+    25,
+    4
+  ],
+  "call_type": "call",
+  "from": "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+  "to": "0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x",
+  "subtraces": 3,
+  "decoded_input": "swap(uint256=7098339054679,uint256=0,address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae,bytes=0x)"
+}

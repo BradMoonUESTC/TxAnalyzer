@@ -1,0 +1,1260 @@
+
+=== 交易追踪分析报告 ===
+
+网络信息:
+- 网络: BSC Mainnet
+- 链ID: 56
+
+基本信息:
+- 交易哈希: 0x2d9c1a00cf3d2fda268d0d11794ad2956774b156355e16441d6edb9a448e5a99
+- 区块号: 52974382
+- 交易位置: 4
+
+调用统计:
+- 总调用数: 284
+- 调用类型分布: {'': 2, 'call': 92, 'staticcall': 148, 'delegatecall': 42}
+- 总转账金额: 10000.039096 ETH
+
+涉及地址数量: 19
+价值转移次数: 12
+函数调用次数: 266
+
+=== 合约信息 ===
+
+合约地址: 0x7022ff59cc52f812ccf09986941378f6422cac1b
+  合约名称: TransparentUpgradeableProxy
+  有源代码: 是
+  编译器版本: v0.8.9+commit.e5eed63a
+  优化: 1
+  许可证: 
+  是否代理: 0
+
+合约地址: 0x559bee76ec549e70630e451d46cb442ef5c230fd
+  合约名称: Unknown
+  有源代码: 否
+  字节码长度: 0 字符
+
+合约地址: 0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d
+  合约名称: PancakePair
+  有源代码: 是
+  编译器版本: v0.5.16+commit.9c3226ce
+  优化: 0
+  许可证: MIT
+  是否代理: 0
+
+合约地址: 0x1e619dbea18f5e0e66d1c2df3f14416d3c804809
+  合约名称: Unknown
+  有源代码: 否
+  字节码长度: 0 字符
+
+合约地址: 0x55d398326f99059ff775485246999027b3197955
+  合约名称: BEP20USDT
+  有源代码: 是
+  编译器版本: v0.5.16+commit.9c3226ce
+  优化: 1
+  许可证: Apache-2.0
+  是否代理: 0
+
+合约地址: 0xc321ac21a07b3d593b269acdace69c3762ca2dd0
+  合约名称: RANTToken
+  有源代码: 是
+  编译器版本: v0.8.20+commit.a1b79de6
+  优化: 1
+  许可证: 
+  是否代理: 0
+
+合约地址: 0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae
+  合约名称: PancakePair
+  有源代码: 是
+  编译器版本: v0.5.16+commit.9c3226ce
+  优化: 0
+  许可证: MIT
+  是否代理: 0
+
+合约地址: 0x1e2d48e640243b04a9fa76eb49080e9ab110b4ac
+  合约名称: Unknown
+  有源代码: 否
+  字节码长度: 0 字符
+
+合约地址: 0xfa780eeebddcf9adf3b13a482802eafae1a7dd72
+  合约名称: RANRTToken1
+  有源代码: 是
+  编译器版本: v0.8.20+commit.a1b79de6
+  优化: 1
+  许可证: 
+  是否代理: 0
+
+合约地址: 0xf5f989c685e4435dd9402b28c2a30cab1e463fd1
+  合约名称: Unknown
+  有源代码: 否
+  字节码长度: 0 字符
+
+合约地址: 0xfd9267ee6594bd8e82e8030c353870fa1773f7f8
+  合约名称: Unknown
+  有源代码: 否
+  字节码长度: 0 字符
+
+合约地址: 0x9adb8c52f0d845739fd3e035ed230f0d4cba785a
+  合约名称: TransparentUpgradeableProxy
+  有源代码: 是
+  编译器版本: v0.8.9+commit.e5eed63a
+  优化: 1
+  许可证: 
+  是否代理: 0
+
+合约地址: 0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c
+  合约名称: WBNB
+  有源代码: 是
+  编译器版本: v0.4.18+commit.9cf6e910
+  优化: 0
+  许可证: GNU GPLv3
+  是否代理: 0
+
+合约地址: 0x10ed43c718714eb63d5aa57b78b54704e256024e
+  合约名称: PancakeRouter
+  有源代码: 是
+  编译器版本: v0.6.6+commit.6c089d02
+  优化: 1
+  许可证: MIT
+  是否代理: 0
+
+合约地址: 0x172fcd41e0913e95784454622d1c3724f546f849
+  合约名称: PancakeV3Pool
+  有源代码: 是
+  编译器版本: v0.7.6+commit.7338295f
+  优化: 1
+  许可证: 
+  是否代理: 0
+
+合约地址: 0xad2cb8f48e74065a0b884af9c5a4ecbba101be23
+  合约名称: Unknown
+  有源代码: 否
+  字节码长度: 0 字符
+
+合约地址: 0xd3b0d838ccceae7ebf1781d11d1bb741db7fe1a7
+  合约名称: Unknown
+  有源代码: 否
+  字节码长度: 0 字符
+
+合约地址: 0x96522adc8d063b75d993bd9f7ea99a3ab19625c5
+  合约名称: Unknown
+  有源代码: 否
+  字节码长度: 0 字符
+
+=== 详细调用链 ===
+0. : 0xad2cb8f4... -> ...
+   价值: 0.000000 ETH
+  1. : 0x1e2d48e6... -> ...
+     价值: 0.000000 ETH
+  2. call: 0x1e2d48e6... -> 0xfd9267ee...
+     函数: start()
+     价值: 0.000000 ETH
+     合约: Unknown
+    3. staticcall: 0xfd9267ee... -> 0xc321ac21...
+       函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+       价值: 0.000000 ETH
+       合约: RANTToken
+      4. staticcall: 0xc321ac21... -> 0x9adb8c52...
+         函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+         价值: 0.000000 ETH
+         合约: TransparentUpgradeableProxy
+        5. delegatecall: 0x9adb8c52... -> 0x559bee76...
+           函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+           价值: 0.000000 ETH
+           合约: Unknown
+    6. staticcall: 0xfd9267ee... -> 0x10ed43c7...
+       函数: getAmountsIn(uint256=96605739642631517916080400,address[]=('0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', '0xc321ac21a07b3d593b269acdace69c3762ca2dd0'))
+       价值: 0.000000 ETH
+       合约: PancakeRouter
+      7. staticcall: 0x10ed43c7... -> 0x42a93c3a...
+         函数: getReserves()
+         价值: 0.000000 ETH
+         合约: PancakePair
+    8. call: 0xfd9267ee... -> 0x172fcd41...
+       函数: flash(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8,uint256=0,uint256=2813769505544453342436,bytes=0x00000000000000000000000000000000000000000000009888e5694d8ba9c4e4)
+       价值: 0.000000 ETH
+       合约: PancakeV3Pool
+      9. staticcall: 0x172fcd41... -> 0x55d39832...
+         函数: balanceOf(address=0x172fcd41e0913e95784454622d1c3724f546f849)
+         价值: 0.000000 ETH
+         合约: BEP20USDT
+      10. staticcall: 0x172fcd41... -> 0xbb4cdb9c...
+         函数: balanceOf(address=0x172fcd41e0913e95784454622d1c3724f546f849)
+         价值: 0.000000 ETH
+         合约: WBNB
+      11. call: 0x172fcd41... -> 0xbb4cdb9c...
+         函数: transfer(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8,uint256=2813769505544453342436)
+         价值: 0.000000 ETH
+         合约: WBNB
+      12. call: 0x172fcd41... -> 0xfd9267ee...
+         函数: pancakeV3FlashCallback(uint256=0,uint256=281376950554445335,bytes=0x00000000000000000000000000000000000000000000009888e5694d8ba9c4e4)
+         价值: 0.000000 ETH
+         合约: Unknown
+        13. call: 0xfd9267ee... -> 0xbb4cdb9c...
+           函数: approve(address=0x10ed43c718714eb63d5aa57b78b54704e256024e,uint256=115792089237316195423570985008687907853269984665640564039457584007913129639935)
+           价值: 0.000000 ETH
+           合约: WBNB
+        14. staticcall: 0xfd9267ee... -> 0x10ed43c7...
+           函数: getAmountsOut(uint256=2813769505544453342436,address[]=('0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', '0xc321ac21a07b3d593b269acdace69c3762ca2dd0'))
+           价值: 0.000000 ETH
+           合约: PancakeRouter
+          15. staticcall: 0x10ed43c7... -> 0x42a93c3a...
+             函数: getReserves()
+             价值: 0.000000 ETH
+             合约: PancakePair
+        16. call: 0xfd9267ee... -> 0x42a93c3a...
+           函数: swap(uint256=0,uint256=96605739642631517916080650,address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8,bytes=0x00000000000000000000000000000000000000000000009888e5694d8ba9c4e4)
+           价值: 0.000000 ETH
+           合约: PancakePair
+          17. call: 0x42a93c3a... -> 0xc321ac21...
+             函数: transfer(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8,uint256=96605739642631517916080650)
+             价值: 0.000000 ETH
+             合约: RANTToken
+            18. call: 0xc321ac21... -> 0x9adb8c52...
+               函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+               价值: 0.000000 ETH
+               合约: TransparentUpgradeableProxy
+              19. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                 函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                 价值: 0.000000 ETH
+                 合约: Unknown
+            20. call: 0xc321ac21... -> 0x9adb8c52...
+               函数: takeToken(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8)
+               价值: 0.000000 ETH
+               合约: TransparentUpgradeableProxy
+              21. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                 函数: takeToken(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8)
+                 价值: 0.000000 ETH
+                 合约: Unknown
+            22. staticcall: 0xc321ac21... -> 0x42a93c3a...
+               函数: getReserves()
+               价值: 0.000000 ETH
+               合约: PancakePair
+            23. staticcall: 0xc321ac21... -> 0x10ed43c7...
+               函数: WETH()
+               价值: 0.000000 ETH
+               合约: PancakeRouter
+            24. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+               函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+               价值: 0.000000 ETH
+               合约: WBNB
+          25. call: 0x42a93c3a... -> 0xfd9267ee...
+             函数: pancakeCall(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8,uint256=0,uint256=96605739642631517916080650,bytes=0x00000000000000000000000000000000000000000000009888e5694d8ba9c4e4)
+             价值: 0.000000 ETH
+             合约: Unknown
+            26. call: 0xfd9267ee... -> 0xbb4cdb9c...
+               函数: transfer(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d,uint256=2813769505544453342436)
+               价值: 0.000000 ETH
+               合约: WBNB
+          27. staticcall: 0x42a93c3a... -> 0xbb4cdb9c...
+             函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+             价值: 0.000000 ETH
+             合约: WBNB
+          28. staticcall: 0x42a93c3a... -> 0xc321ac21...
+             函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+             价值: 0.000000 ETH
+             合约: RANTToken
+            29. staticcall: 0xc321ac21... -> 0x9adb8c52...
+               函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+               价值: 0.000000 ETH
+               合约: TransparentUpgradeableProxy
+              30. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                 函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                 价值: 0.000000 ETH
+                 合约: Unknown
+        31. staticcall: 0xfd9267ee... -> 0xc321ac21...
+           函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+           价值: 0.000000 ETH
+           合约: RANTToken
+          32. staticcall: 0xc321ac21... -> 0x9adb8c52...
+             函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+             价值: 0.000000 ETH
+             合约: TransparentUpgradeableProxy
+            33. delegatecall: 0x9adb8c52... -> 0x559bee76...
+               函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+               价值: 0.000000 ETH
+               合约: Unknown
+        34. call: 0xfd9267ee... -> 0xc321ac21...
+           函数: transfer(address=0xc321ac21a07b3d593b269acdace69c3762ca2dd0,uint256=10733970071403501990675973)
+           价值: 0.000000 ETH
+           合约: RANTToken
+          35. call: 0xc321ac21... -> 0x9adb8c52...
+             函数: takeToken(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8)
+             价值: 0.000000 ETH
+             合约: TransparentUpgradeableProxy
+            36. delegatecall: 0x9adb8c52... -> 0x559bee76...
+               函数: takeToken(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8)
+               价值: 0.000000 ETH
+               合约: Unknown
+          37. call: 0xc321ac21... -> 0x9adb8c52...
+             函数: takeToken(address=0xc321ac21a07b3d593b269acdace69c3762ca2dd0)
+             价值: 0.000000 ETH
+             合约: TransparentUpgradeableProxy
+            38. delegatecall: 0x9adb8c52... -> 0x559bee76...
+               函数: takeToken(address=0xc321ac21a07b3d593b269acdace69c3762ca2dd0)
+               价值: 0.000000 ETH
+               合约: Unknown
+          39. staticcall: 0xc321ac21... -> 0xc321ac21...
+             函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+             价值: 0.000000 ETH
+             合约: RANTToken
+            40. staticcall: 0xc321ac21... -> 0x9adb8c52...
+               函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+               价值: 0.000000 ETH
+               合约: TransparentUpgradeableProxy
+              41. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                 函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                 价值: 0.000000 ETH
+                 合约: Unknown
+          42. staticcall: 0xc321ac21... -> 0xc321ac21...
+             函数: balanceOf(address=0x000000000000000000000000000000000000dead)
+             价值: 0.000000 ETH
+             合约: RANTToken
+            43. staticcall: 0xc321ac21... -> 0x9adb8c52...
+               函数: earnedToken(address=0x000000000000000000000000000000000000dead)
+               价值: 0.000000 ETH
+               合约: TransparentUpgradeableProxy
+              44. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                 函数: earnedToken(address=0x000000000000000000000000000000000000dead)
+                 价值: 0.000000 ETH
+                 合约: Unknown
+          45. staticcall: 0xc321ac21... -> 0xc321ac21...
+             函数: totalSupply()
+             价值: 0.000000 ETH
+             合约: RANTToken
+          46. staticcall: 0xc321ac21... -> 0xc321ac21...
+             函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+             价值: 0.000000 ETH
+             合约: RANTToken
+            47. staticcall: 0xc321ac21... -> 0x9adb8c52...
+               函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+               价值: 0.000000 ETH
+               合约: TransparentUpgradeableProxy
+              48. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                 函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                 价值: 0.000000 ETH
+                 合约: Unknown
+          49. call: 0xc321ac21... -> 0x1e619dbe...
+             价值: 0.000000 ETH
+             合约: Unknown
+          50. call: 0xc321ac21... -> 0x42a93c3a...
+             函数: sync()
+             价值: 0.000000 ETH
+             合约: PancakePair
+            51. staticcall: 0x42a93c3a... -> 0xbb4cdb9c...
+               函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+               价值: 0.000000 ETH
+               合约: WBNB
+            52. staticcall: 0x42a93c3a... -> 0xc321ac21...
+               函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+               价值: 0.000000 ETH
+               合约: RANTToken
+              53. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                 函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                 价值: 0.000000 ETH
+                 合约: TransparentUpgradeableProxy
+                54. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                   函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                   价值: 0.000000 ETH
+                   合约: Unknown
+          55. call: 0xc321ac21... -> 0x9adb8c52...
+             价值: 0.000000 ETH
+             合约: TransparentUpgradeableProxy
+            56. delegatecall: 0x9adb8c52... -> 0x559bee76...
+               价值: 0.000000 ETH
+               合约: Unknown
+              57. call: 0x9adb8c52... -> 0xc321ac21...
+                 函数: approve(address=0x10ed43c718714eb63d5aa57b78b54704e256024e,uint256=3864229225705260716643350)
+                 价值: 0.000000 ETH
+                 合约: RANTToken
+              58. staticcall: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: WETH()
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+              59. call: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: swapExactTokensForETHSupportingFeeOnTransferTokens(uint256=3864229225705260716643350,uint256=0,address[]=('0xc321ac21a07b3d593b269acdace69c3762ca2dd0', '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c'),address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8,uint256=1751728596)
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+                60. call: 0x10ed43c7... -> 0xc321ac21...
+                   函数: transferFrom(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a,address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d,uint256=3864229225705260716643350)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  61. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    62. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  63. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    64. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  65. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  66. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  67. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  68. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  69. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  70. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                71. staticcall: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: getReserves()
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                72. staticcall: 0x10ed43c7... -> 0xc321ac21...
+                   函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  73. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                     函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    74. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                75. call: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: swap(uint256=3125628148186415440634,uint256=0,address=0x10ed43c718714eb63d5aa57b78b54704e256024e,bytes=0x)
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                  76. call: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: transfer(address=0x10ed43c718714eb63d5aa57b78b54704e256024e,uint256=3125628148186415440634)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  77. staticcall: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  78. staticcall: 0x42a93c3a... -> 0xc321ac21...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: RANTToken
+                    79. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: TransparentUpgradeableProxy
+                      80. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                         函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                         价值: 0.000000 ETH
+                         合约: Unknown
+                81. staticcall: 0x10ed43c7... -> 0xbb4cdb9c...
+                   函数: balanceOf(address=0x10ed43c718714eb63d5aa57b78b54704e256024e)
+                   价值: 0.000000 ETH
+                   合约: WBNB
+                82. call: 0x10ed43c7... -> 0xbb4cdb9c...
+                   函数: withdraw(uint256=3125628148186415440634)
+                   价值: 0.000000 ETH
+                   合约: WBNB
+                  83. call: 0xbb4cdb9c... -> 0x10ed43c7...
+                     价值: 3125.628148 ETH
+                     合约: PancakeRouter
+                84. call: 0x10ed43c7... -> 0xfd9267ee...
+                   价值: 3125.628148 ETH
+                   合约: Unknown
+              85. call: 0x9adb8c52... -> 0xc321ac21...
+                 函数: transfer(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8,uint256=5903683539271926094871785)
+                 价值: 0.000000 ETH
+                 合约: RANTToken
+                86. call: 0xc321ac21... -> 0x9adb8c52...
+                   函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                   价值: 0.000000 ETH
+                   合约: TransparentUpgradeableProxy
+                  87. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                     函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                     价值: 0.000000 ETH
+                     合约: Unknown
+                88. call: 0xc321ac21... -> 0x9adb8c52...
+                   函数: takeToken(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8)
+                   价值: 0.000000 ETH
+                   合约: TransparentUpgradeableProxy
+                  89. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                     函数: takeToken(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8)
+                     价值: 0.000000 ETH
+                     合约: Unknown
+                90. staticcall: 0xc321ac21... -> 0xc321ac21...
+                   函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  91. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                     函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    92. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                93. staticcall: 0xc321ac21... -> 0xc321ac21...
+                   函数: balanceOf(address=0x000000000000000000000000000000000000dead)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  94. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                     函数: earnedToken(address=0x000000000000000000000000000000000000dead)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    95. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: earnedToken(address=0x000000000000000000000000000000000000dead)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                96. staticcall: 0xc321ac21... -> 0xc321ac21...
+                   函数: totalSupply()
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+              97. call: 0x9adb8c52... -> 0xc321ac21...
+                 函数: approve(address=0x10ed43c718714eb63d5aa57b78b54704e256024e,uint256=579634383855789107496502)
+                 价值: 0.000000 ETH
+                 合约: RANTToken
+              98. staticcall: 0x9adb8c52... -> 0x55d39832...
+                 函数: balanceOf(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              99. staticcall: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: WETH()
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+              100. call: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256=579634383855789107496502,uint256=0,address[]=('0xc321ac21a07b3d593b269acdace69c3762ca2dd0', '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', '0x55d398326f99059ff775485246999027b3197955'),address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a,uint256=1751728596)
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+                101. call: 0x10ed43c7... -> 0xc321ac21...
+                   函数: transferFrom(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a,address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d,uint256=579634383855789107496502)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  102. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    103. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  104. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    105. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  106. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  107. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  108. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  109. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  110. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  111. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                112. staticcall: 0x10ed43c7... -> 0x55d39832...
+                   函数: balanceOf(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                   价值: 0.000000 ETH
+                   合约: BEP20USDT
+                113. staticcall: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: getReserves()
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                114. staticcall: 0x10ed43c7... -> 0xc321ac21...
+                   函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  115. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                     函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    116. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                117. call: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: swap(uint256=105538128915927,uint256=0,address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae,bytes=0x)
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                  118. call: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: transfer(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae,uint256=105538128915927)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  119. staticcall: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  120. staticcall: 0x42a93c3a... -> 0xc321ac21...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: RANTToken
+                    121. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: TransparentUpgradeableProxy
+                      122. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                         函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                         价值: 0.000000 ETH
+                         合约: Unknown
+                123. staticcall: 0x10ed43c7... -> 0x16b9a828...
+                   函数: getReserves()
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                124. staticcall: 0x10ed43c7... -> 0xbb4cdb9c...
+                   函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                   价值: 0.000000 ETH
+                   合约: WBNB
+                125. call: 0x10ed43c7... -> 0x16b9a828...
+                   函数: swap(uint256=69020680710541014,uint256=0,address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a,bytes=0x)
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                  126. call: 0x16b9a828... -> 0x55d39832...
+                     函数: transfer(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a,uint256=69020680710541014)
+                     价值: 0.000000 ETH
+                     合约: BEP20USDT
+                  127. staticcall: 0x16b9a828... -> 0x55d39832...
+                     函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                     价值: 0.000000 ETH
+                     合约: BEP20USDT
+                  128. staticcall: 0x16b9a828... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                129. staticcall: 0x10ed43c7... -> 0x55d39832...
+                   函数: balanceOf(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                   价值: 0.000000 ETH
+                   合约: BEP20USDT
+              130. staticcall: 0x9adb8c52... -> 0x55d39832...
+                 函数: balanceOf(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              131. staticcall: 0x9adb8c52... -> 0xfa780eee...
+                 价值: 0.000000 ETH
+                 合约: RANRTToken1
+              132. call: 0x9adb8c52... -> 0x55d39832...
+                 函数: transfer(address=0x418d045493860a45f97f8d89e60b900862679d8f,uint256=11503446785090169)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              133. call: 0x9adb8c52... -> 0x55d39832...
+                 函数: transfer(address=0x418d045493860a45f97f8d89e60b900862679d8f,uint256=11503446785090169)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              134. call: 0x9adb8c52... -> 0x55d39832...
+                 函数: transfer(address=0x418d045493860a45f97f8d89e60b900862679d8f,uint256=11503446785090169)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              135. call: 0x9adb8c52... -> 0x55d39832...
+                 函数: transfer(address=0x418d045493860a45f97f8d89e60b900862679d8f,uint256=11503446785090169)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              136. call: 0x9adb8c52... -> 0x55d39832...
+                 函数: transfer(address=0x418d045493860a45f97f8d89e60b900862679d8f,uint256=11503446785090169)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              137. call: 0x9adb8c52... -> 0x55d39832...
+                 函数: transfer(address=0x418d045493860a45f97f8d89e60b900862679d8f,uint256=11503446785090169)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              138. call: 0x9adb8c52... -> 0xc321ac21...
+                 函数: approve(address=0x10ed43c718714eb63d5aa57b78b54704e256024e,uint256=144908595963947276874125)
+                 价值: 0.000000 ETH
+                 合约: RANTToken
+              139. staticcall: 0x9adb8c52... -> 0x55d39832...
+                 函数: balanceOf(address=0x1e619dbea18f5e0e66d1c2df3f14416d3c804809)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              140. staticcall: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: WETH()
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+              141. call: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256=144908595963947276874125,uint256=0,address[]=('0xc321ac21a07b3d593b269acdace69c3762ca2dd0', '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', '0x55d398326f99059ff775485246999027b3197955'),address=0x1e619dbea18f5e0e66d1c2df3f14416d3c804809,uint256=1751728596)
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+                142. call: 0x10ed43c7... -> 0xc321ac21...
+                   函数: transferFrom(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a,address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d,uint256=144908595963947276874125)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  143. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    144. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  145. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    146. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  147. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  148. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  149. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  150. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  151. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  152. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                153. staticcall: 0x10ed43c7... -> 0x55d39832...
+                   函数: balanceOf(address=0x1e619dbea18f5e0e66d1c2df3f14416d3c804809)
+                   价值: 0.000000 ETH
+                   合约: BEP20USDT
+                154. staticcall: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: getReserves()
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                155. staticcall: 0x10ed43c7... -> 0xc321ac21...
+                   函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  156. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                     函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    157. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                158. call: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: swap(uint256=22220308598355,uint256=0,address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae,bytes=0x)
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                  159. call: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: transfer(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae,uint256=22220308598355)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  160. staticcall: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  161. staticcall: 0x42a93c3a... -> 0xc321ac21...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: RANTToken
+                    162. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: TransparentUpgradeableProxy
+                      163. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                         函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                         价值: 0.000000 ETH
+                         合约: Unknown
+                164. staticcall: 0x10ed43c7... -> 0x16b9a828...
+                   函数: getReserves()
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                165. staticcall: 0x10ed43c7... -> 0xbb4cdb9c...
+                   函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                   价值: 0.000000 ETH
+                   合约: WBNB
+                166. call: 0x10ed43c7... -> 0x16b9a828...
+                   函数: swap(uint256=14531817387341637,uint256=0,address=0x1e619dbea18f5e0e66d1c2df3f14416d3c804809,bytes=0x)
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                  167. call: 0x16b9a828... -> 0x55d39832...
+                     函数: transfer(address=0x1e619dbea18f5e0e66d1c2df3f14416d3c804809,uint256=14531817387341637)
+                     价值: 0.000000 ETH
+                     合约: BEP20USDT
+                  168. staticcall: 0x16b9a828... -> 0x55d39832...
+                     函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                     价值: 0.000000 ETH
+                     合约: BEP20USDT
+                  169. staticcall: 0x16b9a828... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                170. staticcall: 0x10ed43c7... -> 0x55d39832...
+                   函数: balanceOf(address=0x1e619dbea18f5e0e66d1c2df3f14416d3c804809)
+                   价值: 0.000000 ETH
+                   合约: BEP20USDT
+              171. staticcall: 0x9adb8c52... -> 0x55d39832...
+                 函数: balanceOf(address=0x1e619dbea18f5e0e66d1c2df3f14416d3c804809)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              172. call: 0x9adb8c52... -> 0x1e619dbe...
+                 价值: 0.000000 ETH
+                 合约: Unknown
+              173. call: 0x9adb8c52... -> 0xc321ac21...
+                 函数: approve(address=0x10ed43c718714eb63d5aa57b78b54704e256024e,uint256=48302865321315758958041)
+                 价值: 0.000000 ETH
+                 合约: RANTToken
+              174. staticcall: 0x9adb8c52... -> 0x55d39832...
+                 函数: balanceOf(address=0x96522adc8d063b75d993bd9f7ea99a3ab19625c5)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              175. staticcall: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: WETH()
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+              176. call: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256=48302865321315758958041,uint256=0,address[]=('0xc321ac21a07b3d593b269acdace69c3762ca2dd0', '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', '0x55d398326f99059ff775485246999027b3197955'),address=0x96522adc8d063b75d993bd9f7ea99a3ab19625c5,uint256=1751728596)
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+                177. call: 0x10ed43c7... -> 0xc321ac21...
+                   函数: transferFrom(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a,address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d,uint256=48302865321315758958041)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  178. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    179. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  180. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    181. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  182. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  183. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  184. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  185. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  186. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  187. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                188. staticcall: 0x10ed43c7... -> 0x55d39832...
+                   函数: balanceOf(address=0x96522adc8d063b75d993bd9f7ea99a3ab19625c5)
+                   价值: 0.000000 ETH
+                   合约: BEP20USDT
+                189. staticcall: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: getReserves()
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                190. staticcall: 0x10ed43c7... -> 0xc321ac21...
+                   函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  191. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                     函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    192. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                193. call: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: swap(uint256=7098339054679,uint256=0,address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae,bytes=0x)
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                  194. call: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: transfer(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae,uint256=7098339054679)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  195. staticcall: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  196. staticcall: 0x42a93c3a... -> 0xc321ac21...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: RANTToken
+                    197. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: TransparentUpgradeableProxy
+                      198. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                         函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                         价值: 0.000000 ETH
+                         合约: Unknown
+                199. staticcall: 0x10ed43c7... -> 0x16b9a828...
+                   函数: getReserves()
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                200. staticcall: 0x10ed43c7... -> 0xbb4cdb9c...
+                   函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                   价值: 0.000000 ETH
+                   合约: WBNB
+                201. call: 0x10ed43c7... -> 0x16b9a828...
+                   函数: swap(uint256=4642229261225032,uint256=0,address=0x96522adc8d063b75d993bd9f7ea99a3ab19625c5,bytes=0x)
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                  202. call: 0x16b9a828... -> 0x55d39832...
+                     函数: transfer(address=0x96522adc8d063b75d993bd9f7ea99a3ab19625c5,uint256=4642229261225032)
+                     价值: 0.000000 ETH
+                     合约: BEP20USDT
+                  203. staticcall: 0x16b9a828... -> 0x55d39832...
+                     函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                     价值: 0.000000 ETH
+                     合约: BEP20USDT
+                  204. staticcall: 0x16b9a828... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                205. staticcall: 0x10ed43c7... -> 0x55d39832...
+                   函数: balanceOf(address=0x96522adc8d063b75d993bd9f7ea99a3ab19625c5)
+                   价值: 0.000000 ETH
+                   合约: BEP20USDT
+              206. staticcall: 0x9adb8c52... -> 0x55d39832...
+                 函数: balanceOf(address=0x96522adc8d063b75d993bd9f7ea99a3ab19625c5)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              207. call: 0x9adb8c52... -> 0x96522adc...
+                 价值: 0.000000 ETH
+                 合约: Unknown
+              208. call: 0x9adb8c52... -> 0xc321ac21...
+                 函数: approve(address=0x10ed43c718714eb63d5aa57b78b54704e256024e,uint256=48302865321315758958041)
+                 价值: 0.000000 ETH
+                 合约: RANTToken
+              209. staticcall: 0x9adb8c52... -> 0x55d39832...
+                 函数: balanceOf(address=0x0a5c6e7be1bd17e928ce128a356064831d8cbaeb)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              210. staticcall: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: WETH()
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+              211. call: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256=48302865321315758958041,uint256=0,address[]=('0xc321ac21a07b3d593b269acdace69c3762ca2dd0', '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', '0x55d398326f99059ff775485246999027b3197955'),address=0x0a5c6e7be1bd17e928ce128a356064831d8cbaeb,uint256=1751728596)
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+                212. call: 0x10ed43c7... -> 0xc321ac21...
+                   函数: transferFrom(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a,address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d,uint256=48302865321315758958041)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  213. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    214. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  215. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    216. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  217. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  218. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  219. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  220. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  221. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  222. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                223. staticcall: 0x10ed43c7... -> 0x55d39832...
+                   函数: balanceOf(address=0x0a5c6e7be1bd17e928ce128a356064831d8cbaeb)
+                   价值: 0.000000 ETH
+                   合约: BEP20USDT
+                224. staticcall: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: getReserves()
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                225. staticcall: 0x10ed43c7... -> 0xc321ac21...
+                   函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  226. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                     函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    227. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                228. call: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: swap(uint256=6952160758996,uint256=0,address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae,bytes=0x)
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                  229. call: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: transfer(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae,uint256=6952160758996)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  230. staticcall: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  231. staticcall: 0x42a93c3a... -> 0xc321ac21...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: RANTToken
+                    232. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: TransparentUpgradeableProxy
+                      233. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                         函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                         价值: 0.000000 ETH
+                         合约: Unknown
+                234. staticcall: 0x10ed43c7... -> 0x16b9a828...
+                   函数: getReserves()
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                235. staticcall: 0x10ed43c7... -> 0xbb4cdb9c...
+                   函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                   价值: 0.000000 ETH
+                   合约: WBNB
+                236. call: 0x10ed43c7... -> 0x16b9a828...
+                   函数: swap(uint256=4546630392894964,uint256=0,address=0x0a5c6e7be1bd17e928ce128a356064831d8cbaeb,bytes=0x)
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                  237. call: 0x16b9a828... -> 0x55d39832...
+                     函数: transfer(address=0x0a5c6e7be1bd17e928ce128a356064831d8cbaeb,uint256=4546630392894964)
+                     价值: 0.000000 ETH
+                     合约: BEP20USDT
+                  238. staticcall: 0x16b9a828... -> 0x55d39832...
+                     函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                     价值: 0.000000 ETH
+                     合约: BEP20USDT
+                  239. staticcall: 0x16b9a828... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                240. staticcall: 0x10ed43c7... -> 0x55d39832...
+                   函数: balanceOf(address=0x0a5c6e7be1bd17e928ce128a356064831d8cbaeb)
+                   价值: 0.000000 ETH
+                   合约: BEP20USDT
+              241. staticcall: 0x9adb8c52... -> 0x55d39832...
+                 函数: balanceOf(address=0x0a5c6e7be1bd17e928ce128a356064831d8cbaeb)
+                 价值: 0.000000 ETH
+                 合约: BEP20USDT
+              242. call: 0x9adb8c52... -> 0xc321ac21...
+                 函数: approve(address=0x10ed43c718714eb63d5aa57b78b54704e256024e,uint256=144908595963947276874125)
+                 价值: 0.000000 ETH
+                 合约: RANTToken
+              243. staticcall: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: WETH()
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+              244. call: 0x9adb8c52... -> 0x10ed43c7...
+                 函数: swapExactTokensForETHSupportingFeeOnTransferTokens(uint256=144908595963947276874125,uint256=0,address[]=('0xc321ac21a07b3d593b269acdace69c3762ca2dd0', '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c'),address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a,uint256=1751728596)
+                 价值: 0.000000 ETH
+                 合约: PancakeRouter
+                245. call: 0x10ed43c7... -> 0xc321ac21...
+                   函数: transferFrom(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a,address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d,uint256=144908595963947276874125)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  246. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    247. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x9adb8c52f0d845739fd3e035ed230f0d4cba785a)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  248. call: 0xc321ac21... -> 0x9adb8c52...
+                     函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    249. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: takeToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                  250. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  251. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  252. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  253. staticcall: 0xc321ac21... -> 0x42a93c3a...
+                     函数: getReserves()
+                     价值: 0.000000 ETH
+                     合约: PancakePair
+                  254. staticcall: 0xc321ac21... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  255. staticcall: 0xc321ac21... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                256. staticcall: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: getReserves()
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                257. staticcall: 0x10ed43c7... -> 0xc321ac21...
+                   函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                   价值: 0.000000 ETH
+                   合约: RANTToken
+                  258. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                     函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: TransparentUpgradeableProxy
+                    259. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: Unknown
+                260. call: 0x10ed43c7... -> 0x42a93c3a...
+                   函数: swap(uint256=20023724937685,uint256=0,address=0x10ed43c718714eb63d5aa57b78b54704e256024e,bytes=0x)
+                   价值: 0.000000 ETH
+                   合约: PancakePair
+                  261. call: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: transfer(address=0x10ed43c718714eb63d5aa57b78b54704e256024e,uint256=20023724937685)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  262. staticcall: 0x42a93c3a... -> 0xbb4cdb9c...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: WBNB
+                  263. staticcall: 0x42a93c3a... -> 0xc321ac21...
+                     函数: balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                     价值: 0.000000 ETH
+                     合约: RANTToken
+                    264. staticcall: 0xc321ac21... -> 0x9adb8c52...
+                       函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                       价值: 0.000000 ETH
+                       合约: TransparentUpgradeableProxy
+                      265. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                         函数: earnedToken(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)
+                         价值: 0.000000 ETH
+                         合约: Unknown
+                266. staticcall: 0x10ed43c7... -> 0xbb4cdb9c...
+                   函数: balanceOf(address=0x10ed43c718714eb63d5aa57b78b54704e256024e)
+                   价值: 0.000000 ETH
+                   合约: WBNB
+                267. call: 0x10ed43c7... -> 0xbb4cdb9c...
+                   函数: withdraw(uint256=20023724937685)
+                   价值: 0.000000 ETH
+                   合约: WBNB
+                  268. call: 0xbb4cdb9c... -> 0x10ed43c7...
+                     价值: 0.000020 ETH
+                     合约: PancakeRouter
+                269. call: 0x10ed43c7... -> 0x9adb8c52...
+                   价值: 0.000020 ETH
+                   合约: TransparentUpgradeableProxy
+                  270. delegatecall: 0x9adb8c52... -> 0x559bee76...
+                     价值: 0.000020 ETH
+                     合约: Unknown
+              271. call: 0x9adb8c52... -> 0x7022ff59...
+                 价值: 0.000020 ETH
+                 合约: TransparentUpgradeableProxy
+                272. delegatecall: 0x7022ff59... -> 0xf5f989c6...
+                   价值: 0.000020 ETH
+                   合约: Unknown
+                  273. staticcall: 0x7022ff59... -> 0x10ed43c7...
+                     函数: WETH()
+                     价值: 0.000000 ETH
+                     合约: PancakeRouter
+                  274. call: 0x7022ff59... -> 0xbb4cdb9c...
+                     函数: deposit()
+                     价值: 0.000020 ETH
+                     合约: WBNB
+        275. call: 0xfd9267ee... -> 0xbb4cdb9c...
+           函数: deposit()
+           价值: 3125.628148 ETH
+           合约: WBNB
+        276. call: 0xfd9267ee... -> 0xbb4cdb9c...
+           函数: transfer(address=0x172fcd41e0913e95784454622d1c3724f546f849,uint256=2814050882495007787771)
+           价值: 0.000000 ETH
+           合约: WBNB
+        277. staticcall: 0xfd9267ee... -> 0xbb4cdb9c...
+           函数: balanceOf(address=0xfd9267ee6594bd8e82e8030c353870fa1773f7f8)
+           价值: 0.000000 ETH
+           合约: WBNB
+        278. call: 0xfd9267ee... -> 0xbb4cdb9c...
+           函数: withdraw(uint256=311577265691407652863)
+           价值: 0.000000 ETH
+           合约: WBNB
+          279. call: 0xbb4cdb9c... -> 0xfd9267ee...
+             价值: 311.577266 ETH
+             合约: Unknown
+        280. call: 0xfd9267ee... -> 0xd3b0d838...
+           价值: 0.100000 ETH
+           合约: Unknown
+        281. call: 0xfd9267ee... -> 0xad2cb8f4...
+           价值: 311.477266 ETH
+           合约: Unknown
+      282. staticcall: 0x172fcd41... -> 0x55d39832...
+         函数: balanceOf(address=0x172fcd41e0913e95784454622d1c3724f546f849)
+         价值: 0.000000 ETH
+         合约: BEP20USDT
+      283. staticcall: 0x172fcd41... -> 0xbb4cdb9c...
+         函数: balanceOf(address=0x172fcd41e0913e95784454622d1c3724f546f849)
+         价值: 0.000000 ETH
+         合约: WBNB

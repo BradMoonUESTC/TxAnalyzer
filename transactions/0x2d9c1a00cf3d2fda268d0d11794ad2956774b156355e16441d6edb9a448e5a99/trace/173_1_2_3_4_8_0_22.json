@@ -1,0 +1,20 @@
+{
+  "trace_index": 173,
+  "trace_address": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    0,
+    22
+  ],
+  "call_type": "call",
+  "from": "0x9adb8c52f0d845739fd3e035ed230f0d4cba785a",
+  "to": "0xc321ac21a07b3d593b269acdace69c3762ca2dd0",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x0000000000000000000000000000000000000000000000000000000000000001",
+  "subtraces": 0,
+  "decoded_input": "approve(address=0x10ed43c718714eb63d5aa57b78b54704e256024e,uint256=48302865321315758958041)"
+}

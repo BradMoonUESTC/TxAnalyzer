@@ -1,0 +1,17 @@
+{
+  "trace_index": 55,
+  "trace_address": [
+    1,
+    2,
+    3,
+    4,
+    8
+  ],
+  "call_type": "call",
+  "from": "0xc321ac21a07b3d593b269acdace69c3762ca2dd0",
+  "to": "0x9adb8c52f0d845739fd3e035ed230f0d4cba785a",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x",
+  "subtraces": 1
+}

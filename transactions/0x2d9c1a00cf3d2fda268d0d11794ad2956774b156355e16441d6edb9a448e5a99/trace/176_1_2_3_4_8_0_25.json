@@ -1,0 +1,20 @@
+{
+  "trace_index": 176,
+  "trace_address": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    0,
+    25
+  ],
+  "call_type": "call",
+  "from": "0x9adb8c52f0d845739fd3e035ed230f0d4cba785a",
+  "to": "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x",
+  "subtraces": 9,
+  "decoded_input": "swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256=48302865321315758958041,uint256=0,address[]=('0xc321ac21a07b3d593b269acdace69c3762ca2dd0', '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', '0x55d398326f99059ff775485246999027b3197955'),address=0x96522adc8d063b75d993bd9f7ea99a3ab19625c5,uint256=1751728596)"
+}

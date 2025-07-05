@@ -182,30 +182,10 @@ class TransactionProcessor:
 
 def main():
     """主函数，提供命令行接口"""
-    import argparse
-    
-    parser = argparse.ArgumentParser(description='处理区块链交易数据')
-    parser.add_argument('--tx-hash', type=str, help='要处理的交易哈希')
-    parser.add_argument('--all', action='store_true', help='处理所有交易')
-    parser.add_argument('--list', action='store_true', help='列出可用的交易')
-    parser.add_argument('--log-dir', type=str, default='log', help='日志文件目录')
-    
-    args = parser.parse_args()
-    
-    processor = TransactionProcessor(args.log_dir)
-    
-    if args.list:
-        transactions = processor.list_available_transactions()
-        print("可用的交易哈希:")
-        for tx in transactions:
-            print(f"  {tx}")
-    elif args.all:
-        processor.process_all_transactions()
-    elif args.tx_hash:
-        processor.process_transaction(args.tx_hash)
-    else:
-        print("请指定 --tx-hash, --all 或 --list 参数")
-        print("使用 --help 查看帮助")
 
+    
+    processor = TransactionProcessor()
+    processor.process_transaction('0x2d9c1a00cf3d2fda268d0d11794ad2956774b156355e16441d6edb9a448e5a99')
+    
 if __name__ == "__main__":
     main() 

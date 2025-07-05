@@ -1,0 +1,18 @@
+{
+  "trace_index": 15,
+  "trace_address": [
+    1,
+    2,
+    3,
+    1,
+    0
+  ],
+  "call_type": "staticcall",
+  "from": "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+  "to": "0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x000000000000000000000000000000000000000000000010e7eb58af353d44f800000000000000000000000000000000000000000058ca1160a43dab9ef3300f000000000000000000000000000000000000000000000000000000006869417d",
+  "subtraces": 0,
+  "decoded_input": "getReserves()"
+}
