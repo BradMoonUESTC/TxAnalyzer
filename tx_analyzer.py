@@ -1,11 +1,13 @@
 import requests
 import json
 import os
+import tempfile
 from datetime import datetime
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Tuple
 import pandas as pd
 import re
 from web3 import Web3
+from heimdall_api import decompile
 
 class TransactionTraceAnalyzer:
     def __init__(self, network: str = None, config_file: str = "config.json"):
@@ -42,9 +44,13 @@ class TransactionTraceAnalyzer:
         self.cache_file = os.path.join(self.log_dir, "function_signature_cache.json")
         self._load_function_signature_cache()
         
+        # 初始化反编译相关配置
+        self.decompile_enabled = True  # 默认启用反编译功能
+        
         print(f"已初始化 {self.network_config['name']} 网络分析器")
         if self.function_signature_cache:
             print(f"加载了 {len(self.function_signature_cache)} 个函数签名缓存")
+        print(f"反编译功能: {'启用' if self.decompile_enabled else '禁用'}")
     
     def _load_config(self, config_file: str) -> Dict[str, Any]:
         """加载配置文件"""
@@ -114,6 +120,15 @@ class TransactionTraceAnalyzer:
         """手动保存缓存"""
         self._save_function_signature_cache()
         print(f"函数签名缓存已保存，共 {len(self.function_signature_cache)} 个条目")
+    
+    def enable_decompile(self, enabled: bool = True):
+        """启用或禁用反编译功能"""
+        self.decompile_enabled = enabled
+        print(f"反编译功能已{'启用' if enabled else '禁用'}")
+    
+    def disable_decompile(self):
+        """禁用反编译功能"""
+        self.enable_decompile(False)
     
     def _parse_function_signature(self, function_signature: str) -> Dict[str, Any]:
         """解析函数签名，提取函数名和参数类型"""
@@ -283,9 +298,11 @@ class TransactionTraceAnalyzer:
                             'bytecode': None
                         }
                     else:
-                        # 如果没有源代码，获取字节码
+                        # 如果没有源代码，获取字节码并尝试反编译
                         bytecode = self._get_contract_bytecode(address)
-                        return {
+                        
+                        # 创建基本的合约信息
+                        contract_data = {
                             'address': address,
                             'has_source_code': False,
                             'source_code': None,
@@ -302,44 +319,139 @@ class TransactionTraceAnalyzer:
                             'implementation': contract_info.get('Implementation'),
                             'bytecode': bytecode
                         }
+                        
+                        # 如果有字节码且反编译功能启用，尝试反编译
+                        if bytecode and self.decompile_enabled:
+                            print(f"检测到合约 {address} 没有公开源代码，开始反编译...")
+                            decompile_result = self._decompile_contract(address, bytecode)
+                            
+                            if decompile_result['success']:
+                                # 添加反编译信息
+                                contract_data['decompiled'] = True
+                                contract_data['raw_sol_code'] = decompile_result['raw_sol_code']
+                                contract_data['optimized_sol_code'] = decompile_result['optimized_sol_code']
+                                contract_data['decompiled_abi'] = decompile_result['abi_code']
+                                contract_data['decompiled_at'] = decompile_result['decompiled_at']
+                                
+                                # 如果反编译成功，将优化后的代码作为源代码
+                                contract_data['source_code'] = decompile_result['optimized_sol_code']
+                                print(f"合约 {address} 反编译成功！")
+                            else:
+                                contract_data['decompiled'] = False
+                                contract_data['decompile_error'] = decompile_result['error']
+                                print(f"合约 {address} 反编译失败: {decompile_result['error']}")
+                        else:
+                            contract_data['decompiled'] = False
+                            if not bytecode:
+                                contract_data['decompile_error'] = '无法获取字节码'
+                            elif not self.decompile_enabled:
+                                contract_data['decompile_error'] = '反编译功能已禁用'
+                        
+                        return contract_data
             
-            return {
+            # 获取字节码并尝试反编译
+            bytecode = self._get_contract_bytecode(address)
+            
+            contract_data = {
                 'address': address,
                 'has_source_code': False,
                 'source_code': None,
                 'abi': None,
                 'contract_name': 'Unknown',
                 'error': 'Failed to fetch contract info',
-                'bytecode': self._get_contract_bytecode(address)
+                'bytecode': bytecode
             }
+            
+            # 如果有字节码且反编译功能启用，尝试反编译
+            if bytecode and self.decompile_enabled:
+                print(f"API获取失败，但检测到合约 {address} 有字节码，开始反编译...")
+                decompile_result = self._decompile_contract(address, bytecode)
+                
+                if decompile_result['success']:
+                    # 添加反编译信息
+                    contract_data['decompiled'] = True
+                    contract_data['raw_sol_code'] = decompile_result['raw_sol_code']
+                    contract_data['optimized_sol_code'] = decompile_result['optimized_sol_code']
+                    contract_data['decompiled_abi'] = decompile_result['abi_code']
+                    contract_data['decompiled_at'] = decompile_result['decompiled_at']
+                    
+                    # 如果反编译成功，将优化后的代码作为源代码
+                    contract_data['source_code'] = decompile_result['optimized_sol_code']
+                    print(f"合约 {address} 反编译成功！")
+                else:
+                    contract_data['decompiled'] = False
+                    contract_data['decompile_error'] = decompile_result['error']
+                    print(f"合约 {address} 反编译失败: {decompile_result['error']}")
+            else:
+                contract_data['decompiled'] = False
+                if not bytecode:
+                    contract_data['decompile_error'] = '无法获取字节码'
+                elif not self.decompile_enabled:
+                    contract_data['decompile_error'] = '反编译功能已禁用'
+            
+            return contract_data
             
         except Exception as e:
             print(f"获取合约信息失败 {address}: {e}")
-            return {
+            
+            # 获取字节码并尝试反编译
+            bytecode = self._get_contract_bytecode(address)
+            
+            contract_data = {
                 'address': address,
                 'has_source_code': False,
                 'source_code': None,
                 'abi': None,
                 'contract_name': 'Unknown',
                 'error': str(e),
-                'bytecode': self._get_contract_bytecode(address)
+                'bytecode': bytecode
             }
+            
+            # 如果有字节码且反编译功能启用，尝试反编译
+            if bytecode and self.decompile_enabled:
+                print(f"API异常，但检测到合约 {address} 有字节码，开始反编译...")
+                decompile_result = self._decompile_contract(address, bytecode)
+                
+                if decompile_result['success']:
+                    # 添加反编译信息
+                    contract_data['decompiled'] = True
+                    contract_data['raw_sol_code'] = decompile_result['raw_sol_code']
+                    contract_data['optimized_sol_code'] = decompile_result['optimized_sol_code']
+                    contract_data['decompiled_abi'] = decompile_result['abi_code']
+                    contract_data['decompiled_at'] = decompile_result['decompiled_at']
+                    
+                    # 如果反编译成功，将优化后的代码作为源代码
+                    contract_data['source_code'] = decompile_result['optimized_sol_code']
+                    print(f"合约 {address} 反编译成功！")
+                else:
+                    contract_data['decompiled'] = False
+                    contract_data['decompile_error'] = decompile_result['error']
+                    print(f"合约 {address} 反编译失败: {decompile_result['error']}")
+            else:
+                contract_data['decompiled'] = False
+                if not bytecode:
+                    contract_data['decompile_error'] = '无法获取字节码'
+                elif not self.decompile_enabled:
+                    contract_data['decompile_error'] = '反编译功能已禁用'
+            
+            return contract_data
     
     def _get_contract_bytecode(self, address: str) -> Optional[str]:
         """获取合约字节码"""
         try:
-            # 根据不同网络使用不同的API参数
-            if self.network == 'ethereum':
-                bytecode_url = f"{self.etherscan_base_url}?chainid={self.chain_id}&module=proxy&action=eth_getCode&address={address}&tag=latest&apikey={self.etherscan_api_key}"
-            else:
-                # 对于Base网络，不需要chainid参数
-                bytecode_url = f"{self.etherscan_base_url}?module=proxy&action=eth_getCode&address={address}&tag=latest&apikey={self.etherscan_api_key}"
+            # 直接使用RPC调用eth_getCode
+            payload = json.dumps({
+                "method": "eth_getCode",
+                "params": [address, "latest"],
+                "id": 1,
+                "jsonrpc": "2.0"
+            })
             
-            response = requests.get(bytecode_url, timeout=10)
+            response = requests.post(self.rpc_url, headers=self.headers, data=payload, timeout=10)
             
             if response.status_code == 200:
                 data = response.json()
-                if data.get('status') == '1' and data.get('result'):
+                if data.get('result') and data['result'] != '0x':
                     return data['result']
             
             return None
@@ -632,6 +744,43 @@ class TransactionTraceAnalyzer:
         
         contract_info = data.get('contract_info', {})
         
+        # 为反编译的合约创建单独的源代码文件
+        for address, info in contract_info.items():
+            if info.get('decompiled') and info.get('optimized_sol_code'):
+                # 保存优化后的源代码
+                sol_filename = f"decompiled_{address[2:12]}_{timestamp}.sol"
+                sol_filepath = os.path.join(self.log_dir, sol_filename)
+                
+                with open(sol_filepath, 'w', encoding='utf-8') as f:
+                    f.write(info['optimized_sol_code'])
+                
+                # 在合约信息中添加文件路径
+                info['optimized_sol_file'] = sol_filepath
+                print(f"反编译的源代码已保存到: {sol_filepath}")
+                
+                # 如果有原始反编译代码，也保存
+                if info.get('raw_sol_code'):
+                    raw_sol_filename = f"raw_decompiled_{address[2:12]}_{timestamp}.sol"
+                    raw_sol_filepath = os.path.join(self.log_dir, raw_sol_filename)
+                    
+                    with open(raw_sol_filepath, 'w', encoding='utf-8') as f:
+                        f.write(info['raw_sol_code'])
+                    
+                    info['raw_sol_file'] = raw_sol_filepath
+                    print(f"原始反编译代码已保存到: {raw_sol_filepath}")
+                
+                # 如果有反编译的ABI，也保存
+                if info.get('decompiled_abi'):
+                    abi_filename = f"decompiled_abi_{address[2:12]}_{timestamp}.json"
+                    abi_filepath = os.path.join(self.log_dir, abi_filename)
+                    
+                    with open(abi_filepath, 'w', encoding='utf-8') as f:
+                        f.write(info['decompiled_abi'])
+                    
+                    info['decompiled_abi_file'] = abi_filepath
+                    print(f"反编译的ABI已保存到: {abi_filepath}")
+        
+        # 保存合约信息JSON
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(contract_info, f, indent=2, ensure_ascii=False)
         
@@ -680,6 +829,22 @@ class TransactionTraceAnalyzer:
             else:
                 bytecode_length = len(info.get('bytecode', '')) if info.get('bytecode') else 0
                 report += f"  字节码长度: {bytecode_length} 字符\n"
+                
+                # 添加反编译信息
+                if info.get('decompiled') is not None:
+                    report += f"  反编译状态: {'成功' if info.get('decompiled') else '失败'}\n"
+                    
+                    if info.get('decompiled'):
+                        report += f"  反编译时间: {info.get('decompiled_at', 'N/A')}\n"
+                        if info.get('optimized_sol_file'):
+                            report += f"  优化代码文件: {info.get('optimized_sol_file')}\n"
+                        if info.get('raw_sol_file'):
+                            report += f"  原始代码文件: {info.get('raw_sol_file')}\n"
+                        if info.get('decompiled_abi_file'):
+                            report += f"  ABI文件: {info.get('decompiled_abi_file')}\n"
+                    else:
+                        if info.get('decompile_error'):
+                            report += f"  反编译错误: {info.get('decompile_error')}\n"
             
             if info.get('error'):
                 report += f"  错误: {info['error']}\n"
@@ -718,6 +883,242 @@ class TransactionTraceAnalyzer:
             f.write(report)
         
         return filepath
+    
+    def ask_vul(self, prompt: str) -> str:
+        """
+        调用大模型API进行代码优化
+        
+        Args:
+            prompt: 发送给大模型的提示
+            
+        Returns:
+            大模型返回的优化后代码
+        """
+        model = os.environ.get('VUL_MODEL', 'gpt-4o-mini')
+        api_key = os.environ.get('OPENAI_API_KEY')
+        api_base = os.environ.get('OPENAI_API_BASE')
+        
+        if not api_key or not api_base:
+            print("错误: 请设置OPENAI_API_KEY和OPENAI_API_BASE环境变量")
+            return ""
+        
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {api_key}'
+        }
+
+        data = {
+            'model': model,
+            'messages': [
+                {
+                    'role': 'user',
+                    'content': prompt
+                }
+            ]
+        }
+
+        try:
+            response = requests.post(f'https://{api_base}/v1/chat/completions', 
+                                   headers=headers, 
+                                   json=data)
+            response.raise_for_status()
+            response_data = response.json()
+            if 'choices' in response_data and len(response_data['choices']) > 0:
+                return response_data['choices'][0]['message']['content']
+            else:
+                return ""
+        except requests.exceptions.RequestException as e:
+            print(f"大模型API调用失败。错误: {str(e)}")
+            return ""
+    
+    def heimdall_decompile(self, contract_address: str, bytecode: str) -> Tuple[Optional[str], Optional[str]]:
+        """
+        使用Heimdall反编译合约
+        
+        Args:
+            contract_address: 合约地址
+            bytecode: 合约bytecode
+            
+        Returns:
+            (反编译的sol代码, ABI代码) 的元组，失败时返回 (None, None)
+        """
+        print(f"正在使用Heimdall反编译合约 {contract_address}...")
+        
+        try:
+            # 创建临时文件保存bytecode
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.bin', delete=False) as temp_file:
+                temp_file.write(bytecode)
+                temp_file_path = temp_file.name
+            
+            # 生成合约名称
+            contract_name = f"Contract_{contract_address[2:12]}"  # 使用地址的前10个字符
+            
+            # 执行反编译
+            result = decompile(
+                target=temp_file_path,
+                name=contract_name,
+                include_sol=True,
+                include_yul=False
+            )
+            
+            # 清理临时文件
+            os.unlink(temp_file_path)
+            
+            # 检查输出文件
+            sol_file = f"output/local/{contract_name}-decompiled.sol"
+            abi_file = f"output/local/{contract_name}-abi.json"
+            
+            sol_code = None
+            abi_code = None
+            
+            if os.path.exists(sol_file):
+                with open(sol_file, 'r', encoding='utf-8') as f:
+                    sol_code = f.read()
+                print(f"成功读取反编译的Solidity代码: {sol_file}")
+            else:
+                print(f"警告: 未找到反编译的Solidity文件: {sol_file}")
+            
+            if os.path.exists(abi_file):
+                with open(abi_file, 'r', encoding='utf-8') as f:
+                    abi_code = f.read()
+                print(f"成功读取ABI文件: {abi_file}")
+            else:
+                print(f"警告: 未找到ABI文件: {abi_file}")
+            
+            return sol_code, abi_code
+            
+        except Exception as e:
+            print(f"Heimdall反编译失败 {contract_address}: {e}")
+            # 清理临时文件
+            try:
+                os.unlink(temp_file_path)
+            except:
+                pass
+            return None, None
+    
+    def optimize_with_ai(self, raw_sol_code: str, abi_code: str, contract_address: str) -> str:
+        """
+        使用大模型优化反编译的代码
+        
+        Args:
+            raw_sol_code: 原始反编译的Solidity代码
+            abi_code: ABI代码
+            contract_address: 合约地址
+            
+        Returns:
+            优化后的Solidity代码
+        """
+        print(f"正在使用大模型优化反编译代码: {contract_address}")
+        
+        prompt = f"""
+你是一个专业的Solidity智能合约开发者和代码审计师。我有一个通过反编译工具(Heimdall)从字节码还原的智能合约代码，需要你帮助优化和重构，使其更加清晰、专业和易于理解。
+
+合约地址: {contract_address}
+
+原始反编译代码:
+```solidity
+{raw_sol_code}
+```
+
+ABI信息:
+```json
+{abi_code}
+```
+
+请帮我完成以下任务：
+
+1. **代码清理和优化**：
+   - 将所有 `var_a`, `var_b` 等通用变量名替换为有意义的变量名
+   - 优化复杂的逻辑判断，使其更易读
+   - 移除不必要的代码和重复逻辑
+   - 添加适当的注释说明
+
+2. **函数重构**：
+   - 为所有函数添加清晰的功能描述注释
+   - 优化函数的参数命名
+   - 整理函数的逻辑流程
+
+3. **合约结构优化**：
+   - 添加适当的状态变量注释
+   - 优化存储布局
+   - 添加事件和错误定义的注释
+
+4. **安全性分析**：
+   - 识别并注释关键的安全机制
+   - 标注潜在的安全问题（如果有的话）
+   - 解释复杂的权限控制逻辑
+
+5. **业务逻辑分析**：
+   - 分析并注释核心业务逻辑
+   - 识别代币的特殊功能和机制
+   - 解释与其他合约的交互逻辑
+
+请输出一个完整的、优化后的Solidity合约代码，包含：
+- 清晰的合约名称和描述
+- 完整的导入语句
+- 详细的注释说明
+- 优化后的变量和函数命名
+- 清晰的代码结构
+
+请确保代码的可读性和专业性，同时保持原有的功能逻辑不变。
+"""
+        
+        try:
+            optimized_code = self.ask_vul(prompt)
+            if optimized_code:
+                print("大模型优化完成！")
+                return optimized_code
+            else:
+                print("大模型优化失败，返回原始代码")
+                return raw_sol_code
+        except Exception as e:
+            print(f"大模型优化过程中出错: {e}")
+            return raw_sol_code
+    
+    def _decompile_contract(self, address: str, bytecode: str) -> Dict[str, Any]:
+        """
+        执行合约反编译流程
+        
+        Args:
+            address: 合约地址
+            bytecode: 合约字节码
+            
+        Returns:
+            反编译结果字典
+        """
+        if not self.decompile_enabled:
+            return {
+                'success': False,
+                'error': '反编译功能已禁用'
+            }
+        
+        try:
+            # 使用Heimdall反编译
+            raw_sol_code, abi_code = self.heimdall_decompile(address, bytecode)
+            
+            if not raw_sol_code:
+                return {
+                    'success': False,
+                    'error': 'Heimdall反编译失败'
+                }
+            
+            # 使用大模型优化
+            optimized_sol_code = self.optimize_with_ai(raw_sol_code, abi_code or "", address)
+            
+            return {
+                'success': True,
+                'raw_sol_code': raw_sol_code,
+                'abi_code': abi_code,
+                'optimized_sol_code': optimized_sol_code,
+                'decompiled_at': datetime.now().isoformat()
+            }
+            
+        except Exception as e:
+            print(f"反编译过程中出错 {address}: {e}")
+            return {
+                'success': False,
+                'error': f'反编译过程中出错: {str(e)}'
+            }
 
 
 # 使用示例
@@ -731,6 +1132,20 @@ if __name__ == "__main__":
     
     # 也可以在运行时切换网络
     # analyzer.switch_network('ethereum')  # 切换到以太坊网络
+    
+    # 反编译功能控制（默认启用）
+    # analyzer.enable_decompile(True)   # 启用反编译功能
+    # analyzer.disable_decompile()      # 禁用反编译功能
+    
+    print("=== 交易追踪分析器 ===")
+    print("功能说明:")
+    print("- 自动获取交易追踪数据")
+    print("- 解析合约信息")
+    print("- 对于没有公开源代码的合约，自动进行反编译")
+    print("- 使用Heimdall进行字节码反编译")
+    print("- 使用大模型优化反编译后的代码")
+    print("- 生成详细的分析报告")
+    print()
     
     # 示例交易哈希 - 请替换为实际的交易哈希
     tx_hash = "0x2d9c1a00cf3d2fda268d0d11794ad2956774b156355e16441d6edb9a448e5a99"
@@ -754,6 +1169,20 @@ if __name__ == "__main__":
         print(f"调用数据已保存到: {csv_file}")
         print(f"合约信息已保存到: {contract_file}")
         
+        # 统计反编译结果
+        decompiled_count = 0
+        total_contracts = 0
+        
+        for address, info in parsed_data.get('contract_info', {}).items():
+            total_contracts += 1
+            if info.get('decompiled'):
+                decompiled_count += 1
+        
+        print(f"\n=== 反编译统计 ===")
+        print(f"总合约数量: {total_contracts}")
+        print(f"成功反编译: {decompiled_count}")
+        print(f"反编译率: {decompiled_count/total_contracts*100:.1f}%" if total_contracts > 0 else "N/A")
+        
         # 生成并显示摘要报告
         report = analyzer.generate_summary_report(parsed_data)
         print(report)
@@ -767,3 +1196,7 @@ if __name__ == "__main__":
         print(f"函数签名缓存已保存，共 {len(analyzer.function_signature_cache)} 个条目")
         
         print("\n分析完成！")
+        print("注意：反编译功能需要设置以下环境变量：")
+        print("- OPENAI_API_KEY: OpenAI API密钥")
+        print("- OPENAI_API_BASE: OpenAI API基础URL")
+        print("- VUL_MODEL: 使用的模型（可选，默认为gpt-4o-mini）")

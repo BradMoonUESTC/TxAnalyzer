@@ -14,7 +14,7 @@ import subprocess
 
 def run_heimdall(command):
     """Helper function to run heimdall commands."""
-    heimdall_path = "/Users/xueyue/.bifrost/bin/heimdall"  
+    heimdall_path = "/Users/oker/.bifrost/bin/heimdall"  
     result = subprocess.run([heimdall_path] + command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     if result.returncode != 0:
         print("Error:", result.stderr)
