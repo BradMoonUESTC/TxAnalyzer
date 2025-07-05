@@ -10,6 +10,7 @@ TxAnalyzer is a tool for analyzing blockchain transactions that supports multipl
 - 📈 **Visualization Reports**: Generates detailed transaction analysis reports
 - 🛡️ **Attack Analysis**: Specialized in-depth analysis functionality for attack transactions
 - 💾 **Caching Mechanism**: Function signature caching to improve analysis efficiency
+- 🤖 **AI-Driven Analysis**: Provides professional prompt templates for automatic transaction root cause analysis in Cursor, supporting vulnerability analysis, attack path reconstruction, POC generation, and other intelligent features
 
 ## Important Notes
 
