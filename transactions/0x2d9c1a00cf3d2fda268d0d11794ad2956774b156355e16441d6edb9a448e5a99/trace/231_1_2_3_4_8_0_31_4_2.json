@@ -1,0 +1,22 @@
+{
+  "trace_index": 231,
+  "trace_address": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    0,
+    31,
+    4,
+    2
+  ],
+  "call_type": "staticcall",
+  "from": "0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d",
+  "to": "0xc321ac21a07b3d593b269acdace69c3762ca2dd0",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x00000000000000000000000000000000000000000003e02ae6ace2efe9d5178c",
+  "subtraces": 1,
+  "decoded_input": "balanceOf(address=0x42a93c3af7cb1bbc757dd2ec4977fd6d7916ba1d)"
+}

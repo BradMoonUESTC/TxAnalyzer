@@ -1,0 +1,20 @@
+{
+  "trace_index": 272,
+  "trace_address": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    0,
+    36,
+    0
+  ],
+  "call_type": "delegatecall",
+  "from": "0x7022ff59cc52f812ccf09986941378f6422cac1b",
+  "to": "0xf5f989c685e4435dd9402b28c2a30cab1e463fd1",
+  "value": 20023724937685,
+  "value_eth": 2.0023724937685e-05,
+  "output": "0x",
+  "subtraces": 2
+}

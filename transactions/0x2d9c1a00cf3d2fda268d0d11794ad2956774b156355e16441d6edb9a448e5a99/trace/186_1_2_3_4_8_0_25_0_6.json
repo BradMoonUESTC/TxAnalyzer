@@ -1,0 +1,22 @@
+{
+  "trace_index": 186,
+  "trace_address": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    0,
+    25,
+    0,
+    6
+  ],
+  "call_type": "staticcall",
+  "from": "0xc321ac21a07b3d593b269acdace69c3762ca2dd0",
+  "to": "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+  "value": 0,
+  "value_eth": 0.0,
+  "output": "0x000000000000000000000000bb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+  "subtraces": 0,
+  "decoded_input": "WETH()"
+}
