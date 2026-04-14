@@ -12,12 +12,12 @@ Tested on 18 real-world DeFi hack events from [DeFiHackLabs](https://github.com/
 
 ### Recommended Models
 
-| Rank | Model | Accuracy | Notes |
-|------|-------|----------|-------|
-| 1 | **Claude Opus 4.6** | ~94% | Best overall; deepest reasoning and trust boundary penetration |
-| 2 | GPT xhigh | ~94% | Near-Opus quality; strong on complex multi-step exploits |
-| 3 | GPT high | ~85% | Good balance of cost and accuracy |
-| 4 | GPT (standard) | ~61% | Baseline; may miss subtle write-object causality |
+| Rank | Model | Notes |
+|------|-------|-------|
+| 1 | **Claude Opus 4.6** | Best overall; deepest reasoning and trust boundary penetration |
+| 2 | GPT xhigh | Near-Opus quality; strong on complex multi-step exploits |
+| 3 | GPT high | Good balance of cost and accuracy |
+| 4 | GPT (standard) | Baseline; may miss subtle write-object causality |
 
 ## Quick Start
 
