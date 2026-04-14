@@ -1,6 +1,23 @@
 # TxAnalyzer
 
-Blockchain attack transaction analysis tool. Pull transaction artifacts (trace, contract source code, opcode) in one command, then automatically analyze attack transaction root causes via Cursor AI Agent.
+Blockchain attack transaction analysis tool. Pull transaction artifacts (trace, contract source code, opcode) in one command, then automatically analyze attack transaction root causes via AI Agent.
+
+**Online version: [txanalyzer.xyz](https://txanalyzer.xyz/)**
+
+## Benchmark
+
+Tested on 18 real-world DeFi hack events from [DeFiHackLabs](https://github.com/SunWeb3Sec/DeFiHackLabs), comparing AI-generated root cause analysis against human expert reports:
+
+![AI RCA vs Human RCA Benchmark](assets/benchmark.png)
+
+### Recommended Models
+
+| Rank | Model | Accuracy | Notes |
+|------|-------|----------|-------|
+| 1 | **Claude Opus 4.6** | ~94% | Best overall; deepest reasoning and trust boundary penetration |
+| 2 | GPT xhigh | ~94% | Near-Opus quality; strong on complex multi-step exploits |
+| 3 | GPT high | ~85% | Good balance of cost and accuracy |
+| 4 | GPT (standard) | ~61% | Baseline; may miss subtle write-object causality |
 
 ## Quick Start
 
@@ -56,6 +73,8 @@ TxAnalyzer/
 ├── .cursor/               # Cursor AI Agent configuration
 │   ├── skills/attack-tx-analysis/  # Analysis workflow orchestration Skill
 │   └── rules/                      # Methodology enforcement Rule
+├── assets/                # Images and static assets
+│   └── benchmark.png      # AI vs Human RCA benchmark
 ├── config.json            # Network configuration (not committed)
 ├── config_template.json   # Configuration template
 └── requirements.txt
