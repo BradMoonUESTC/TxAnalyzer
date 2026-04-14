@@ -1,0 +1,18 @@
+/.venv
+/.vscode
+.cursor/
+.DS_Store
+__pycache__/
+*.pyc
+
+.env
+config.json
+
+# Generated artifacts / caches
+/output/
+/decompiled_contracts/
+/transactions/
+/log/*
+!/log/function_signature_cache.json
+venv
+config.json

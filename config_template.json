@@ -1,0 +1,34 @@
+{
+  "networks": {
+    "bsc": {
+      "name": "BSC Mainnet",
+      "rpc_url": "https://bnb-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY",
+      "etherscan_api_key": "YOUR_BSCSCAN_API_KEY",
+      "etherscan_base_url": "https://api.etherscan.io/v2/api",
+      "chain_id": 56
+    },
+    "eth": {
+      "name": "Ethereum Mainnet",
+      "rpc_url": "https://eth-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY",
+      "etherscan_api_key": "YOUR_ETHERSCAN_API_KEY",
+      "etherscan_base_url": "https://api.etherscan.io/v2/api",
+      "chain_id": 1
+    },
+    "polygon_amoy": {
+      "name": "Polygon Amoy Testnet",
+      "rpc_url": "https://polygon-amoy.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY",
+      "etherscan_api_key": "YOUR_POLYGONSCAN_API_KEY",
+      "etherscan_base_url": "https://api-amoy.polygonscan.com/api",
+      "chain_id": 80002
+    },
+    "sepolia": {
+      "name": "Ethereum Sepolia Testnet",
+      "rpc_url": "https://eth-sepolia.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY",
+      "etherscan_api_key": "YOUR_ETHERSCAN_API_KEY",
+      "etherscan_base_url": "https://api-sepolia.etherscan.io/api",
+      "chain_id": 11155111
+    }
+  },
+  "default_network": "bsc",
+  "comment": "Config template. Replace with your actual API keys and RPC URLs. Do not commit config.json with real keys."
+} 
