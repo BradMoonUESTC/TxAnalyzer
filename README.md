@@ -4,6 +4,28 @@ Blockchain attack transaction analysis tool. Pull transaction artifacts (trace, 
 
 **Online version: [txanalyzer.xyz](https://txanalyzer.xyz/)**
 
+## Install as Agent Skill
+
+This project follows the [Agent Skills](https://agentskills.io/) open standard and works with **Claude Code**, **Cursor**, **Codex**, **Windsurf**, and [40+ more agents](https://github.com/vercel-labs/skills#supported-agents).
+
+```bash
+# Install to your current project (symlink)
+npx skills add xueyue/TxAnalyzer
+
+# Install globally (available across all projects)
+npx skills add xueyue/TxAnalyzer -g
+
+# Install to a specific agent
+npx skills add xueyue/TxAnalyzer -a claude-code
+npx skills add xueyue/TxAnalyzer -a cursor
+```
+
+After installation, ask your agent:
+
+> "Analyze attack transaction 0xYOUR_TX_HASH on bsc"
+
+The agent will follow the 6-phase methodology to pull artifacts, analyze root cause, and produce `transactions/<tx>/analysis/result.md`.
+
 ## Benchmark
 
 Tested on 18 real-world DeFi hack events from [DeFiHackLabs](https://github.com/SunWeb3Sec/DeFiHackLabs), comparing AI-generated root cause analysis against human expert reports:
@@ -56,6 +78,8 @@ Copy `config_template.json` to `config.json` and fill in your API keys:
 
 ```
 TxAnalyzer/
+├── SKILL.md               # Agent Skill entry point (agentskills.io standard)
+├── CLAUDE.md              # Backward-compatible project memory for Claude Code
 ├── docs/                  # Analysis methodology & specifications (core)
 │   ├── ATTACK_TX_ANALYSIS_METHODOLOGY.md   # 6-phase workflow
 │   ├── ATTACK_TX_ANALYSIS_SPEC.md          # Mandatory gates & stop conditions
@@ -70,9 +94,7 @@ TxAnalyzer/
 │   ├── backfill_opcodes.py
 │   ├── cleanup.py         # Clean up transaction artifacts
 │   └── decompile.py       # Contract decompilation
-├── .cursor/               # Cursor AI Agent configuration
-│   ├── skills/attack-tx-analysis/  # Analysis workflow orchestration Skill
-│   └── rules/                      # Methodology enforcement Rule
+├── log/                   # Caches (function signature cache)
 ├── assets/                # Images and static assets
 │   └── benchmark.png      # AI vs Human RCA benchmark
 ├── config.json            # Network configuration (not committed)

@@ -1,6 +1,5 @@
 /.venv
 /.vscode
-.cursor/
 .DS_Store
 __pycache__/
 *.pyc
@@ -15,4 +14,9 @@ config.json
 /log/*
 !/log/function_signature_cache.json
 venv
-config.json
+
+# Agent-specific local config (not part of the skill)
+.cursor/
+.claude/
+.agents/
+.codex/
