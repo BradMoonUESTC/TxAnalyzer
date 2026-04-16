@@ -195,5 +195,5 @@ Analysis result: `transactions/<tx_hash>/analysis/result.md`
 ## Donate
 
 If this project helps you, consider buying me a coffee:
-
+7zYKQuRQWuNZLiYpxPB2VcpciiYyMKgjdDvohdHoQm3e（solana）
 **`0x8625c682ac045652a95dd0cd6dea8e47e3cfb175`** (All EVM chains)
