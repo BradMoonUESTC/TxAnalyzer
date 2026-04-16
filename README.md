@@ -191,3 +191,9 @@ Claude will automatically activate the virtual environment, pull artifacts, read
 After execution, artifacts are generated in: `transactions/<tx_hash>/` (the directory includes a `README.md` explaining each subdirectory).
 
 Analysis result: `transactions/<tx_hash>/analysis/result.md`
+
+## Donate
+
+If this project helps you, consider buying me a coffee:
+
+**`0x8625c682ac045652a95dd0cd6dea8e47e3cfb175`** (All EVM chains)
