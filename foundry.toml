@@ -1,0 +1,13 @@
+[profile.default]
+src = "replay/src"
+test = "replay/test"
+script = "replay/script"
+out = "replay/out"
+cache_path = "replay/cache"
+solc_version = "0.8.24"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+
+[rpc_endpoints]
+bsc = "${BSC_RPC_URL}"

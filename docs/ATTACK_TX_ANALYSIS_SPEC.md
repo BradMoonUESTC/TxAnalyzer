@@ -247,6 +247,58 @@ If your conclusion/narrative contains expressions like "price rose from \(A\) to
 
 Otherwise, the "from A to B" numerical narrative must not be used (can only write "a significant jump occurred," and the shortest supplementary evidence action must be provided).
 
+---
+
+## 5.8 Post-Deep-Dive Reverse Engineering / PoC / RPC Replay (Mandatory)
+
+Immediately after `ATTACK_TX_ANALYSIS_DEEP_DIVE.md`, the analysis must enter the post-deep-dive reconstruction stage.
+
+### 5.8.1 Required Inputs
+
+Before generating a PoC or attempting replay, the agent must read:
+
+- `transactions/<tx>/analysis/result.md`
+- relevant trace slices under `transactions/<tx>/trace/`
+- relevant attacker/protocol contract materials under `transactions/<tx>/contract_sources/`
+- `transactions/<tx>/contracts/*.json`
+- relevant opcode artifacts under `transactions/<tx>/opcode/` when source/decompilation is insufficient
+
+### 5.8.2 Reverse Engineering and PoC Are a Single Deliverable
+
+If the attacker contract is unverified or only partially understood:
+
+- decompilation/re-decompilation must be used to recover the attacker logic
+- the recovered logic must flow directly into the PoC call sequence
+
+It is prohibited to output a decompilation appendix that is disconnected from the exploit reproduction steps.
+
+### 5.8.3 Replay Anchor Constraint
+
+Replay must be anchored to the **attack block context**:
+
+- use the attack transaction's block number as the time anchor
+- prefer the **pre-state of the attack transaction within that block**
+- if only an approximation is available (for example parent block state + attack block environment), the approximation must be named explicitly
+
+Replaying on the latest block and presenting it as reproduction is prohibited.
+
+### 5.8.4 Mandatory Output Fields
+
+`result.md` must additionally include:
+
+- `attack_contract_set`: attacker EOA / attacker contracts / primary attack contract / supporting contracts
+- `reverse_engineering_notes`: attack entry functions / key branches / hardcoded addresses / approvals / balances
+- `minimal_poc`: preconditions + ordered call sequence + per-step purpose
+- `rpc_replay_anchor`: block number / tx hash / replay state anchor / replay method
+- `replay_result`: `reproduced` / `partially_reproduced` / `blocked`
+- `replay_evidence`: what matched the real tx, what diverged, and why
+
+### 5.8.5 Prohibited Actions
+
+- Prohibited: ignoring `result.md` and regenerating a generic PoC from scratch
+- Prohibited: treating attacker-contract reverse engineering as optional when verified source is unavailable
+- Prohibited: claiming successful replay without naming the reproduced anomaly / settlement / profit evidence
+
 ## 6) Mandatory Sentence Patterns (Preventing LLM Step-Skipping)
 
 When you see `transfer(to=settlement_object)` showing success + `sync() / settlement` reading an extremely small balance / extreme value, you must first write:
@@ -267,6 +319,7 @@ The following conditions must all be met before issuing "final root cause (mediu
 - All critical anomalous phenomena can be explained by a single causal chain (no "residuals")
 - Profit path can be verified via closed-loop calculation (fund flows consistent with key formulas)
 - **Trust boundary penetration (mandatory)**: Every validation/verification function on the attack path has been audited (source code opened, boundary conditions checked), with SECURE/VULNERABLE conclusion given. Not allowed to skip source code audit of deeper validation functions (such as proof verification, signature validation, Merkle tree implementation) on the grounds that "Candidate A already closes the loop"
+- **Post-deep-dive reconstruction (mandatory)**: A reverse-engineered attacker-contract view, minimal PoC, and attack-block RPC replay verdict have all been appended to `result.md` (a blocked replay is acceptable only if the blocker is named explicitly)
 
 > **Additional stopping condition (mandatory when Victim-first Gate is triggered)**: Must explain "why these third parties became extractable (liquidatable / seizable / passively rebalanced)," and align that reason with controllable actions within the transaction (swap / oracle input / mechanism migration); otherwise, issuing a final root cause (medium/high) is not allowed.
 

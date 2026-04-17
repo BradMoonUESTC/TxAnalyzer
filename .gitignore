@@ -13,6 +13,8 @@ config.json
 /transactions/
 /log/*
 !/log/function_signature_cache.json
+/replay/out/
+/replay/cache/
 venv
 
 # Agent-specific local config (not part of the skill)

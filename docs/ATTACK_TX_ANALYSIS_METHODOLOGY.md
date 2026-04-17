@@ -248,6 +248,36 @@ Recommended mandatory delivery structure (for reuse and post-mortem review):
 
 ---
 
+## Post-Deep-Dive Phase 7: Reverse Engineering, Unified PoC, and RPC Replay
+
+This stage executes **after** `ATTACK_TX_ANALYSIS_DEEP_DIVE.md` completes.
+
+Its purpose is to turn the analytical conclusion into an attacker-contract-centered exploit reconstruction:
+
+- Read **all** materials under `transactions/<tx>/`, including `analysis/result.md`
+- Reconstruct the attacker contract logic using verified source or decompiled output
+- Treat **reverse engineering + PoC generation as one task**
+- Attempt replay against RPC at the **attack block context**, not the latest state
+
+### Mandatory Deliverables
+
+- `Attack Contract Set`: attacker EOA, attacker contracts, primary attack contract, supporting contracts
+- `Reverse Engineering Notes`: entry functions, key branches, hardcoded addresses, required approvals/balances
+- `Minimal PoC`: preconditions + ordered call sequence + per-step purpose
+- `RPC Replay at Attack Block`: replay anchor, replay method, replay verdict, matched/divergent evidence
+
+### Replay Constraint
+
+When reproducing the exploit, use the attack transaction's block as the time anchor. Prefer the transaction's **pre-state within the same block**; if unavailable, use the closest RPC-supported approximation and state the gap explicitly.
+
+### Output Location
+
+Append the PoC and replay sections to `transactions/<tx>/analysis/result.md`.
+
+For the execution checklist and prohibitions of this stage, see `ATTACK_TX_ANALYSIS_POC_REPLAY.md`.
+
+---
+
 ## LLM-Friendly "Slicing Strategy" (Avoiding Ingesting the Entire Trace)
 
 - **Slice by profit path**: Retain only the call subtree directly related to "final asset reflow"

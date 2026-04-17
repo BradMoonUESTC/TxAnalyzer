@@ -24,7 +24,7 @@ After installation, ask your agent:
 
 > "Analyze attack transaction 0xYOUR_TX_HASH on bsc"
 
-The agent will follow the 6-phase methodology to pull artifacts, analyze root cause, and produce `transactions/<tx>/analysis/result.md`.
+The agent will follow the 6-phase methodology, Deep Dive, and post-Deep-Dive PoC/RPC replay workflow to pull artifacts, analyze root cause, and produce `transactions/<tx>/analysis/result.md`.
 
 ## Benchmark
 
@@ -53,7 +53,7 @@ After pulling artifacts, start a conversation in Cursor:
 
 > "Analyze this attack transaction 0xYOUR_TX_HASH on bsc"
 
-The Agent will strictly follow the methodology to analyze and output `transactions/<tx>/analysis/result.md`.
+The Agent will strictly follow the methodology to analyze and output `transactions/<tx>/analysis/result.md`, including the reverse-engineering / PoC / RPC replay sections.
 
 ## Prerequisites: `config.json`
 
@@ -84,7 +84,10 @@ TxAnalyzer/
 │   ├── ATTACK_TX_ANALYSIS_METHODOLOGY.md   # 6-phase workflow
 │   ├── ATTACK_TX_ANALYSIS_SPEC.md          # Mandatory gates & stop conditions
 │   ├── ATTACK_TX_ANALYSIS_MODULES.md       # Modular checklists
-│   └── ATTACK_TX_ANALYSIS_DEEP_DIVE.md     # Deep root cause investigation
+│   ├── ATTACK_TX_ANALYSIS_DEEP_DIVE.md     # Deep root cause investigation
+│   ├── ATTACK_TX_ANALYSIS_POC_REPLAY.md    # Post-deep-dive reverse engineering / PoC / RPC replay
+│   ├── ATTACK_TX_ANALYSIS_FORK_HARNESS.md  # Foundry + anvil tx-prestate fork harness
+│   └── ATTACK_TX_ANALYSIS_RISK_BOUND.md    # Read-only risk upper bound evaluation
 ├── txanalyzer/            # Core analysis library
 │   ├── tx_analyzer.py     # TransactionTraceAnalyzer
 │   ├── transaction_processor.py
@@ -132,23 +135,31 @@ python scripts/decompile.py
 
 ## AI Analysis Workflow
 
-The analysis is driven by Cursor Agent, strictly following 4 methodology documents:
+The analysis is driven by Cursor Agent, strictly following 4 pre-analysis methodology documents plus 3 mandatory post-Deep-Dive reconstruction documents:
 
 1. **Pull Artifacts**: `pull_artifacts.py` fetches trace / contract source code / opcode / selector mappings
 2. **Phase 1-6 Analysis**: Follows the 6-phase workflow in `ATTACK_TX_ANALYSIS_METHODOLOGY.md`
 3. **SPEC Self-Check**: After each phase, validates against gates and constraints in `ATTACK_TX_ANALYSIS_SPEC.md`
 4. **Module Triggers**: Executes checklists when trigger conditions in `ATTACK_TX_ANALYSIS_MODULES.md` are met
 5. **Deep Dive**: After Phase 6, penetrates trust boundaries per `ATTACK_TX_ANALYSIS_DEEP_DIVE.md`
+6. **PoC / RPC Replay**: Reverse-engineers the attacker contract, generates a unified PoC, and replays at the attack-block RPC context per `ATTACK_TX_ANALYSIS_POC_REPLAY.md`
+7. **Fork Harness**: Builds a Foundry + `anvil --fork-transaction-hash` harness with blocker tests, seeded simulation, and exact-prestate replay (with `==` assertions) per `ATTACK_TX_ANALYSIS_FORK_HARNESS.md`
+8. **Risk Upper Bound**: Read-only defensive evaluation of `min(objectBalance, accumulatorRemaining)` at the tx prestate per `ATTACK_TX_ANALYSIS_RISK_BOUND.md`
+
+A reference end-to-end walkthrough lives in [`case_studies/tx-0x767d8a0f-lista-flap/`](case_studies/tx-0x767d8a0f-lista-flap/README.md).
 
 ## Claude Code Skill Usage
 
 This project ships with a Claude Code skill (`CLAUDE.md`) that turns Claude into an end-to-end attack transaction analyst. When loaded, Claude will:
 
 1. **Pull artifacts** — run `pull_artifacts.py` to fetch trace, contract source code, opcodes, and selector mappings
-2. **Read all 4 methodology docs** — `METHODOLOGY`, `SPEC`, `MODULES`, `DEEP_DIVE` (cannot be skipped)
+2. **Read all 7 methodology docs** — `METHODOLOGY`, `SPEC`, `MODULES`, `DEEP_DIVE`, `POC_REPLAY`, `FORK_HARNESS`, `RISK_BOUND` (cannot be skipped)
 3. **Execute 6-phase analysis** — Triage → Graphs → Hypotheses → Evidence → Closure → Deliverable, with SPEC self-check after each phase
 4. **Deep root cause drilling** — penetrate every trust boundary and audit each validation function line-by-line
-5. **Output `result.md`** — one-sentence root cause, evidence chain, reproduction steps, fix recommendations, confidence rating
+5. **Post-deep-dive exploit reconstruction** — reverse-engineer the attacker contract, generate a unified PoC
+6. **Foundry + anvil replay** — build the tx-prestate fork harness and assert deterministic on-fork outputs with `==`
+7. **Risk upper bound evaluation** — read-only `min(balance, accumulatorRemaining)` at the tx prestate; compare to actual drain
+8. **Output `result.md`** — one-sentence root cause, evidence chain, deep root cause, PoC, replay evidence, risk upper bound, fix recommendations, confidence rating
 
 ### Quick Start with Claude Code
 
@@ -164,7 +175,7 @@ claude
 > Analyze attack transaction 0xYOUR_TX_HASH on bsc
 ```
 
-Claude will automatically activate the virtual environment, pull artifacts, read the methodology, and produce an audit-grade report at `transactions/<tx>/analysis/result.md`.
+Claude will automatically activate the virtual environment, pull artifacts, read the methodology, and produce an audit-grade report at `transactions/<tx>/analysis/result.md`, including Deep Root Cause, attacker-contract PoC, attack-block RPC replay, and risk upper bound evaluation.
 
 ### Key Constraints Enforced by the Skill
 

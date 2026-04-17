@@ -99,6 +99,8 @@ Append the following after Phase 6 in result.md:
 (Step 5, if any revisions apply)
 ```
 
+After this section is complete, **do not stop**. Immediately continue to `ATTACK_TX_ANALYSIS_POC_REPLAY.md` and append the reverse-engineering / PoC / RPC replay sections after the Deep Root Cause Analysis section.
+
 ---
 
 ## Common "False Stopping Points" (traps you must avoid)
