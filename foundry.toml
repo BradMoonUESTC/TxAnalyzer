@@ -11,3 +11,4 @@ optimizer_runs = 200
 
 [rpc_endpoints]
 bsc = "${BSC_RPC_URL}"
+eth = "${ETH_RPC_URL}"

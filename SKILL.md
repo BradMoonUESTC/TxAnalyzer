@@ -1,9 +1,10 @@
 ---
 name: attack-tx-analysis
 description: >-
-  Analyze blockchain attack transactions end-to-end: pull artifacts (trace,
-  contract source code, opcodes, selector mappings), decompile unverified
-  contracts via Heimdall, then perform systematic 6-phase root cause analysis
+  Analyze blockchain attack transactions end-to-end: pull chain-specific
+  artifacts first (EVM: traces, contract source, opcodes, selectors; Solana:
+  transaction/meta payloads, instructions, logs, accounts, invoked program
+  metadata), then perform the full EVM-oriented 6-phase root cause analysis
   with deep trust boundary drilling, attacker-contract reverse engineering,
   unified PoC generation, Foundry + anvil tx-prestate fork replay with
   deterministic assertions, and read-only risk upper bound evaluation to
@@ -24,7 +25,7 @@ Pull transaction artifacts → analyze root cause following strict methodology �
 pip install -r ${CLAUDE_SKILL_DIR}/requirements.txt
 ```
 
-2. Copy `config_template.json` to `config.json` at the project working directory and fill in API keys (Alchemy RPC URL + Etherscan/BscScan API key). If `config.json` is missing, prompt the user.
+2. Copy `config_template.json` to `config.json` at the project working directory and fill in the required RPC/API keys. EVM networks require an Alchemy-compatible RPC URL plus an Etherscan-compatible API key; Solana only requires the RPC URL. If `config.json` is missing, prompt the user.
 
 3. **Heimdall** (optional, for decompiling unverified contracts): binary expected at `~/.bifrost/bin/heimdall`. Install via `curl -L https://bifrost.sh | bash && bifrost --install heimdall`.
 
@@ -32,7 +33,7 @@ pip install -r ${CLAUDE_SKILL_DIR}/requirements.txt
 
 5. **Shell env** (required for Fork Harness): `BSC_RPC_URL` (and equivalents for other networks, e.g. `ETH_RPC_URL`) must be exported before running `anvil --fork-url "$BSC_RPC_URL" ...` and `forge test`. Value should match the RPC URL in `config.json`.
 
-Supported networks: `bsc` (default), `eth`, `sepolia`, `polygon_amoy`.
+Supported networks: `bsc` (default), `eth`, `sepolia`, `polygon_amoy`, `solana`.
 
 ## Core Commands
 
@@ -44,6 +45,10 @@ python ${CLAUDE_SKILL_DIR}/scripts/cleanup.py --tx <TX_HASH> [--dry-run]
 python ${CLAUDE_SKILL_DIR}/scripts/decompile.py
 python ${CLAUDE_SKILL_DIR}/scripts/backfill_opcodes.py [--ctf ctf] [--timeout 600]
 ```
+
+Notes:
+- Use the same `pull_artifacts.py` entrypoint for both EVM and Solana.
+- `--skip-opcode` and `--reuse-log` are EVM-specific knobs. Solana standard RPC has no opcode trace; `opcode/` will contain capability notes only.
 
 ### Replay harness tooling (Foundry + anvil)
 
@@ -72,6 +77,7 @@ cast tx           --rpc-url http://127.0.0.1:8546 <TX_HASH>
 
 ### `pull_artifacts.py` Pipeline
 
+For EVM networks:
 1. `trace_transaction` RPC → parse call tree → save `tx_trace_*.json` + `tx_calls_*.csv`
 2. Per contract: fetch source/ABI from Etherscan → export `.sol`; decompile via Heimdall if unverified
 3. `TransactionProcessor` splits into `transactions/<tx>/trace/`, `contracts/`, `contract_sources/`
@@ -79,7 +85,17 @@ cast tx           --rpc-url http://127.0.0.1:8546 <TX_HASH>
 5. Extract selectors → query function signatures from openchain.xyz → `selectors_from_trace.json`
 6. Generate `transactions/<tx>/README.md`
 
+For Solana:
+1. `getTransaction` (`json` / `jsonParsed` / `base64`) → save raw payloads
+2. Save outer/inner instructions, logs, lamport/token balance diffs, signature status, and containing block
+3. Fetch all touched accounts via `getMultipleAccounts` (`base64` + `jsonParsed`) → split into `accounts/`
+4. Summarize invoked programs into `contracts/` and persist program account / ProgramData / executable bytes into `contract_sources/`
+5. Generate `opcode/capabilities.json` explaining why standard Solana RPC cannot provide opcode traces
+6. Generate `transactions/<tx>/README.md`
+
 ## Artifact Directory Structure
+
+For EVM transactions:
 
 ```
 transactions/<tx_hash>/
@@ -107,6 +123,43 @@ transactions/<tx_hash>/
     └── tx_assembly_*.asm.txt
 ```
 
+For Solana transactions:
+
+```
+transactions/<signature>/
+├── README.md
+├── manifest.json
+├── analysis/
+│   └── result.md
+├── trace/
+│   ├── transaction_json.json
+│   ├── transaction_jsonParsed.json
+│   ├── transaction_base64.json
+│   ├── instructions/
+│   │   ├── __index__.json
+│   │   ├── 000_outer.json
+│   │   └── 000_inner_00.json
+│   ├── log_messages.json
+│   ├── lamport_diffs.json
+│   ├── token_balance_diffs.json
+│   └── summary.json
+├── accounts/
+│   └── <pubkey>/
+│       ├── account_info_base64.json
+│       ├── account_info_jsonParsed.json
+│       └── summary.json
+├── contracts/
+│   └── <program_id>.json
+├── contract_sources/
+│   └── <program_id>/
+│       ├── program_account_*.json
+│       ├── programdata_account_*.json
+│       ├── program_binary.so
+│       └── summary.json
+└── opcode/
+    └── capabilities.json
+```
+
 ## Analysis Workflow
 
 When a user provides a transaction hash requesting attack analysis, execute strictly in this order.
@@ -117,9 +170,15 @@ When a user provides a transaction hash requesting attack analysis, execute stri
 python ${CLAUDE_SKILL_DIR}/scripts/pull_artifacts.py --network <NET> --tx <TX>
 ```
 
+If `<NET>` is `solana`, still pull artifacts through the same command, but treat the resulting artifact set as Solana RPC materials rather than EVM trace/opcode/source materials.
+
 ### Step 2: Read Methodology (must not skip, must not partially read)
 
-Before analysis, **all 7 analysis documents must be read in full**. SPEC has the highest priority. After Deep Dive, the PoC/Replay, Fork Harness, and Risk Upper Bound documents must also be executed in order.
+Choose the methodology stack by network:
+
+#### If `<NET>` is an EVM network
+
+Before analysis, **all 7 EVM analysis documents must be read in full**. SPEC has the highest priority. After Deep Dive, the PoC/Replay, Fork Harness, and Risk Upper Bound documents must also be executed in order.
 
 | Document | Path | Responsibility | Priority |
 |----------|------|----------------|----------|
@@ -131,7 +190,23 @@ Before analysis, **all 7 analysis documents must be read in full**. SPEC has the
 | **FORK HARNESS** | [docs/ATTACK_TX_ANALYSIS_FORK_HARNESS.md](docs/ATTACK_TX_ANALYSIS_FORK_HARNESS.md) | Concrete Foundry + anvil tx-prestate harness: layout, blocker tests, deterministic assertions | Mandatory when PoC/Replay requires executable evidence |
 | **RISK BOUND** | [docs/ATTACK_TX_ANALYSIS_RISK_BOUND.md](docs/ATTACK_TX_ANALYSIS_RISK_BOUND.md) | Defensive read-only risk upper bound evaluation at the tx prestate | Mandatory after Fork Harness replay passes |
 
+#### If `<NET>` is `solana`
+
+Read **only** the Solana methodology document below as the primary analysis spec:
+
+| Document | Path | Responsibility | Priority |
+|----------|------|----------------|----------|
+| **SOLANA METHODOLOGY** | [docs/ATTACK_TX_ANALYSIS_SOLANA.md](docs/ATTACK_TX_ANALYSIS_SOLANA.md) | Solana-native transaction classification, account-role analysis, CPI/value-flow closure, and output requirements | **Highest** |
+
+Important scope note for Solana:
+- Do not hallucinate nonexistent Solana equivalents of `debug_traceTransaction`, selector mappings, storage-slot provenance, or verified-source retrieval from standard RPC.
+- The EVM Deep Dive / PoC / Fork Harness / Risk Bound stack is **not mandatory by default** for Solana and must not be force-applied unless the user explicitly asks for a deeper custom experiment and the required artifacts/tooling actually exist.
+
 ### Step 3: Execute Analysis Strictly Phase by Phase
+
+If `<NET>` is `solana`, follow the workflow, mandatory questions, evidence hierarchy, and output template in [docs/ATTACK_TX_ANALYSIS_SOLANA.md](docs/ATTACK_TX_ANALYSIS_SOLANA.md).
+
+If `<NET>` is an EVM network, use the phase table below.
 
 | Phase | Task | Required on Completion |
 |-------|------|----------------------|
@@ -150,17 +225,28 @@ Before analysis, **all 7 analysis documents must be read in full**. SPEC has the
 
 | Resource | Path | Purpose |
 |----------|------|---------|
-| Contract source code | `transactions/<tx>/contract_sources/` | Verified source or decompiled code |
-| Trace | `transactions/<tx>/trace/` | Call records split by depth/order |
-| Opcode | `transactions/<tx>/opcode/` | Instruction-level structLogs |
-| Contract info | `transactions/<tx>/contracts/` | Per-address metadata |
-| Selector mapping | `transactions/<tx>/contract_sources/<addr>/selectors_from_trace.json` | Function signature lookup |
-| Summary report | `transactions/<tx>/tx_report.txt` | Transaction overview |
+| Contract source code / program artifacts | `transactions/<tx>/contract_sources/` | EVM verified/decompiled code, or Solana program account / ProgramData / executable bytes |
+| Trace | `transactions/<tx>/trace/` | EVM call records, or Solana transaction/meta/instruction/log artifacts |
+| Opcode | `transactions/<tx>/opcode/` | EVM instruction-level structLogs, or Solana capability notes |
+| Contract / program info | `transactions/<tx>/contracts/` | Per-address or per-program metadata |
+| Selector mapping | `transactions/<tx>/contract_sources/<addr>/selectors_from_trace.json` | EVM-only function signature lookup |
+| Summary report | `transactions/<tx>/tx_report.txt` | EVM transaction overview |
 | Prior analysis result | `transactions/<tx>/analysis/result.md` | Mandatory input to post-deep-dive PoC / replay stage |
 
 ### Step 4: Output Results
 
-Write the following into `transactions/<tx>/analysis/result.md`, in this order, with no stage skipped:
+If `<NET>` is `solana`, write `transactions/<tx>/analysis/result.md` per [docs/ATTACK_TX_ANALYSIS_SOLANA.md](docs/ATTACK_TX_ANALYSIS_SOLANA.md), including at minimum:
+
+1. **Classification and Verdict**
+2. **Participants and Roles**
+3. **Instruction Narrative / Phase Map**
+4. **Economic and State Impact**
+5. **Root Cause or Benign Explanation**
+6. **Key Evidence**
+7. **Open Questions / Blockers**
+8. **Confidence**
+
+If `<NET>` is an EVM network, write the following in this order, with no stage skipped:
 
 1. **Phase 1–6 root cause body** — per `ATTACK_TX_ANALYSIS_METHODOLOGY.md` + `ATTACK_TX_ANALYSIS_SPEC.md` (one-sentence root cause, trigger conditions, participants, Write → Read → Trigger → Profit closed loop, key evidence, minimal reproduction, remediation).
 2. **Deep Root Cause Analysis** — per `ATTACK_TX_ANALYSIS_DEEP_DIVE.md` (trust boundary chain, line-by-line audit of each validation function, deepest root cause, revisions to initial analysis).
@@ -169,7 +255,7 @@ Write the following into `transactions/<tx>/analysis/result.md`, in this order, 
 5. **Risk Upper Bound (at tx prestate)** — per `ATTACK_TX_ANALYSIS_RISK_BOUND.md` (measurements, `maxDrainableCap`, drained-in-this-tx, residual, binding constraint, repro pointer).
 6. **Confidence** — low / medium / high (= `min(rootCauseConfidence, replayConfidence)` per `ATTACK_TX_ANALYSIS_RISK_BOUND.md`).
 
-Any missing stage must be explicitly labeled `blocked` (and why) instead of silently omitted.
+Any missing required stage must be explicitly labeled `blocked` (and why) instead of silently omitted.
 
 ---
 
@@ -268,7 +354,8 @@ Any missing stage must be explicitly labeled `blocked` (and why) instead of sile
 
 | Tool | Purpose | Authentication |
 |------|---------|---------------|
-| Alchemy RPC | trace_transaction, debug_traceTransaction, eth_getCode | API key in config.json rpc_url |
+| Alchemy / EVM RPC | trace_transaction, debug_traceTransaction, eth_getCode | API key in config.json rpc_url |
+| Solana RPC | getTransaction, getBlock, getSignatureStatuses, getMultipleAccounts | API key embedded in config.json rpc_url when provider requires it |
 | Etherscan/BscScan | Contract source code, ABI, verification status | config.json etherscan_api_key |
 | openchain.xyz | selector → function signature lookup | No authentication required |
 | [Heimdall-rs](https://github.com/Jon-Becker/heimdall-rs/) | EVM bytecode decompilation | Local binary ~/.bifrost/bin/heimdall |

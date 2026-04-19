@@ -1,6 +1,6 @@
 # TxAnalyzer
 
-Blockchain attack transaction analysis tool. Pull transaction artifacts (trace, contract source code, opcode) in one command, then automatically analyze attack transaction root causes via AI Agent.
+Blockchain attack transaction analysis tool. Pull transaction artifacts in one command, then automatically analyze attack transaction root causes via AI Agent. EVM networks include trace / contract source code / opcode; Solana includes the richest standard-RPC transaction / instruction / account / program artifacts available from RPC.
 
 **Online version: [txanalyzer.xyz](https://txanalyzer.xyz/)**
 
@@ -47,6 +47,7 @@ Tested on 18 real-world DeFi hack events from [DeFiHackLabs](https://github.com/
 source venv/bin/activate
 pip install -r requirements.txt
 python scripts/pull_artifacts.py --network bsc --tx 0xYOUR_TX_HASH
+python scripts/pull_artifacts.py --network solana --tx YOUR_SOLANA_SIGNATURE
 ```
 
 After pulling artifacts, start a conversation in Cursor:
@@ -57,7 +58,7 @@ The Agent will strictly follow the methodology to analyze and output `transactio
 
 ## Prerequisites: `config.json`
 
-Copy `config_template.json` to `config.json` and fill in your API keys:
+Copy `config_template.json` to `config.json` and fill in your RPC/API keys:
 
 ```json
 {
@@ -68,6 +69,10 @@ Copy `config_template.json` to `config.json` and fill in your API keys:
       "etherscan_api_key": "YOUR_BSCSCAN_API_KEY",
       "etherscan_base_url": "https://api.etherscan.io/v2/api",
       "chain_id": 56
+    },
+    "solana": {
+      "name": "Solana Mainnet",
+      "rpc_url": "https://solana-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY"
     }
   },
   "default_network": "bsc"
@@ -94,6 +99,7 @@ TxAnalyzer/
 │   └── heimdall_api.py
 ├── scripts/               # CLI entry scripts
 │   ├── pull_artifacts.py  # Pull transaction artifacts
+│   ├── pull_solana_artifacts.py
 │   ├── backfill_opcodes.py
 │   ├── cleanup.py         # Clean up transaction artifacts
 │   └── decompile.py       # Contract decompilation
@@ -111,14 +117,21 @@ TxAnalyzer/
 
 ```bash
 python scripts/pull_artifacts.py --network bsc --tx 0x...
+python scripts/pull_artifacts.py --network solana --tx <SOLANA_SIGNATURE>
 ```
 
 Common parameters:
 - `--tx`: Required, transaction hash
-- `--network`: Optional, defaults to `bsc`
+- `--network`: Optional, defaults to `bsc`; use `solana` for Solana signatures
 - `--timeout`: Optional, defaults to `120`
-- `--skip-opcode`: Skip `debug_traceTransaction`
-- `--reuse-log`: Reuse existing log file
+- `--skip-opcode`: Skip `debug_traceTransaction` for EVM; Solana has no opcode trace via standard RPC
+- `--reuse-log`: Reuse existing EVM log file
+
+When `--network solana` is used, artifacts are organized under `transactions/<signature>/` and include:
+- `trace/`: `getTransaction` raw payloads, parsed instructions, logs, block/status, lamport/token balance diffs
+- `accounts/`: every touched account as both `base64` and `jsonParsed`
+- `contracts/` + `contract_sources/`: invoked program summaries, ProgramData, executable bytes when available
+- `opcode/`: capability notes explaining why standard Solana RPC cannot provide opcode-level traces
 
 ### Clean Up Transaction Artifacts
 
@@ -137,7 +150,7 @@ python scripts/decompile.py
 
 The analysis is driven by Cursor Agent, strictly following 4 pre-analysis methodology documents plus 3 mandatory post-Deep-Dive reconstruction documents:
 
-1. **Pull Artifacts**: `pull_artifacts.py` fetches trace / contract source code / opcode / selector mappings
+1. **Pull Artifacts**: `pull_artifacts.py` fetches chain-specific artifacts. EVM: trace / contract source / opcode / selector mappings. Solana: transaction/meta payloads, instructions, logs, account snapshots, invoked program metadata/binaries.
 2. **Phase 1-6 Analysis**: Follows the 6-phase workflow in `ATTACK_TX_ANALYSIS_METHODOLOGY.md`
 3. **SPEC Self-Check**: After each phase, validates against gates and constraints in `ATTACK_TX_ANALYSIS_SPEC.md`
 4. **Module Triggers**: Executes checklists when trigger conditions in `ATTACK_TX_ANALYSIS_MODULES.md` are met
@@ -152,7 +165,7 @@ A reference end-to-end walkthrough lives in [`case_studies/tx-0x767d8a0f-lista-f
 
 This project ships with a Claude Code skill (`CLAUDE.md`) that turns Claude into an end-to-end attack transaction analyst. When loaded, Claude will:
 
-1. **Pull artifacts** — run `pull_artifacts.py` to fetch trace, contract source code, opcodes, and selector mappings
+1. **Pull artifacts** — run `pull_artifacts.py` to fetch chain-specific artifacts
 2. **Read all 7 methodology docs** — `METHODOLOGY`, `SPEC`, `MODULES`, `DEEP_DIVE`, `POC_REPLAY`, `FORK_HARNESS`, `RISK_BOUND` (cannot be skipped)
 3. **Execute 6-phase analysis** — Triage → Graphs → Hypotheses → Evidence → Closure → Deliverable, with SPEC self-check after each phase
 4. **Deep root cause drilling** — penetrate every trust boundary and audit each validation function line-by-line
@@ -166,7 +179,7 @@ This project ships with a Claude Code skill (`CLAUDE.md`) that turns Claude into
 ```bash
 # 1. Ensure config.json is set up with your API keys
 cp config_template.json config.json
-# Edit config.json to fill in Alchemy RPC URL and Etherscan API Key
+# Edit config.json to fill in the RPC URL; EVM networks also require Etherscan-compatible API keys
 
 # 2. Start Claude Code from the project root
 claude
@@ -176,6 +189,8 @@ claude
 ```
 
 Claude will automatically activate the virtual environment, pull artifacts, read the methodology, and produce an audit-grade report at `transactions/<tx>/analysis/result.md`, including Deep Root Cause, attacker-contract PoC, attack-block RPC replay, and risk upper bound evaluation.
+
+For Solana, the artifact puller is supported through the same `pull_artifacts.py` entrypoint, but the current deep exploit methodology and replay stack remain EVM-first because they rely on EVM traces/opcodes/Foundry semantics.
 
 ### Key Constraints Enforced by the Skill
 
@@ -196,6 +211,7 @@ Claude will automatically activate the virtual environment, pull artifacts, read
 | Ethereum Mainnet | `eth` |
 | Sepolia Testnet | `sepolia` |
 | Polygon Amoy | `polygon_amoy` |
+| Solana Mainnet | `solana` |
 
 ## Output Location
 

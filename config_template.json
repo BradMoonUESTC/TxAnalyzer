@@ -27,6 +27,10 @@
       "etherscan_api_key": "YOUR_ETHERSCAN_API_KEY",
       "etherscan_base_url": "https://api-sepolia.etherscan.io/api",
       "chain_id": 11155111
+    },
+    "solana": {
+      "name": "Solana Mainnet",
+      "rpc_url": "https://solana-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY"
     }
   },
   "default_network": "bsc",

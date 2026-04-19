@@ -192,5 +192,9 @@
   "0xe8e33700": "addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)",
   "0xe6a43905": "getPair(address,address)",
   "0x6a627842": "mint(address)",
-  "0x017e7e58": "feeTo()"
+  "0x017e7e58": "feeTo()",
+  "0x0894edf1": "commitVerification(bytes,bytes32)",
+  "0xa825d747": "verify((uint32,bytes32,uint64),address,bytes32)",
+  "0xb143044b": "execute((uint32,address,bytes,uint256,bytes)[])",
+  "0x0223536e": "verify(bytes,bytes32,uint64)"
 }

@@ -2,8 +2,13 @@
 # -*- coding: utf-8 -*-
 
 """
-Pull all transaction artifacts (trace splitting + opcode/structLogs + contract source/decompilation + selector mapping)
-and persist them to transactions/<tx>/.
+Pull transaction artifacts and persist them to transactions/<tx>/.
+
+For EVM networks, this fetches trace splitting + opcode/structLogs + contract
+source/decompilation + selector mapping.
+For Solana, this fetches the most detailed standard-RPC artifacts available:
+transaction/meta payloads, outer/inner instructions, logs, balance diffs,
+account snapshots, and invoked program binaries/metadata.
 
 Output structure:
 1) trace: split into transactions/<tx>/trace/ (by trace_index and trace_address, reflecting order + depth)
@@ -29,6 +34,7 @@ import json
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Set
 
+from pull_solana_artifacts import pull_solana_artifacts
 from txanalyzer import TransactionTraceAnalyzer
 from txanalyzer import TransactionProcessor
 
@@ -85,6 +91,15 @@ def main() -> int:
 
     tx = args.tx
     network = args.network
+
+    if network == "solana":
+        if args.reuse_log:
+            print("Note: --reuse-log is only supported for EVM flows and will be ignored for Solana.")
+        if args.skip_opcode:
+            print("Note: Solana standard RPC has no opcode trace; opcode/ will contain capability notes only.")
+        pull_solana_artifacts(tx, network=network, timeout=args.timeout)
+        return 0
+
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     tx_short = tx[:10]
 
