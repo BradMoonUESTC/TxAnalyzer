@@ -1,8 +1,7 @@
 # main.py
 
-import sys
-
 import subprocess
+from pathlib import Path
 
 # def run_heimdall(command):
 #     """Helper function to run heimdall commands."""
@@ -14,8 +13,8 @@ import subprocess
 
 def run_heimdall(command):
     """Helper function to run heimdall commands."""
-    heimdall_path = "/Users/xueyue/.bifrost/bin/heimdall"  
-    result = subprocess.run([heimdall_path] + command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    heimdall_path = Path.home() / ".bifrost" / "bin" / "heimdall"
+    result = subprocess.run([str(heimdall_path)] + command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     if result.returncode != 0:
         print("Error:", result.stderr)
     return result.stdout
@@ -77,4 +76,3 @@ def inspect(target, api_key=None):
     if api_key:
         command += ['-t', api_key]
     return run_heimdall(command)
-
