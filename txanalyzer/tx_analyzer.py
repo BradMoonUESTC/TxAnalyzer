@@ -1057,7 +1057,7 @@ class TransactionTraceAnalyzer:
     def _parse_single_trace(self, trace: Dict[str, Any], index: int) -> Dict[str, Any]:
         """Parse a single trace record"""
         action = trace.get('action', {})
-        result = trace.get('result', {})
+        result = trace.get('result') or {}
         
         # Extract function signature from input data
         input_data = action.get('input', '')
