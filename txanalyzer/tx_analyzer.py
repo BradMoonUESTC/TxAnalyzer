@@ -51,6 +51,10 @@ class TransactionTraceAnalyzer:
         self.function_signature_cache = {}
         self.cache_file = os.path.join(self.cache_dir, "function_signature_cache.json")
         self._load_function_signature_cache()
+
+        # Contract info cache directory (shared across all tx analyses)
+        self.contract_cache_dir = os.path.join(self.cache_dir, "contract_cache")
+        os.makedirs(self.contract_cache_dir, exist_ok=True)
         
         # Initialize decompilation config
         self.decompile_enabled = True
@@ -377,8 +381,39 @@ class TransactionTraceAnalyzer:
         
         print(f"Switched to {self.network_config['name']} network")
     
+    def _get_contract_cache_path(self, address: str) -> str:
+        """Return the cache file path for a contract address, scoped by chain_id."""
+        chain_id = self.chain_id if self.chain_id else "unknown"
+        return os.path.join(self.contract_cache_dir, f"{chain_id}_{address.lower()}.json")
+
+    def _load_contract_from_cache(self, address: str) -> Optional[Dict[str, Any]]:
+        """Load contract info from local cache. Returns None on miss."""
+        cache_path = self._get_contract_cache_path(address)
+        if os.path.exists(cache_path):
+            try:
+                with open(cache_path, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            except (json.JSONDecodeError, IOError):
+                return None
+        return None
+
+    def _save_contract_to_cache(self, address: str, contract_data: Dict[str, Any]):
+        """Save contract info to local cache."""
+        cache_path = self._get_contract_cache_path(address)
+        try:
+            with open(cache_path, 'w', encoding='utf-8') as f:
+                json.dump(contract_data, f, ensure_ascii=False)
+        except IOError:
+            pass  # Cache write failure is non-fatal
+
     def get_contract_info_from_etherscan(self, address: str) -> Dict[str, Any]:
-        """Fetch contract info from Etherscan"""
+        """Fetch contract info from Etherscan, with local cache."""
+        # Check cache first
+        cached = self._load_contract_from_cache(address)
+        if cached is not None:
+            print(f"Contract {address} loaded from cache")
+            return cached
+
         try:
             # Fetch source code (compatible with Etherscan v2 unified API & legacy per-chain endpoints)
             #
@@ -404,7 +439,7 @@ class TransactionTraceAnalyzer:
                     
                     # Has source code, return directly
                     if contract_info.get('SourceCode') and contract_info['SourceCode'] != '':
-                        return {
+                        result = {
                             'address': address,
                             'has_source_code': True,
                             'source_code': contract_info.get('SourceCode'),
@@ -421,6 +456,8 @@ class TransactionTraceAnalyzer:
                             'implementation': contract_info.get('Implementation'),
                             'bytecode': None
                         }
+                        self._save_contract_to_cache(address, result)
+                        return result
                     else:
                         # Verified but no source code (rare), treat as unverified
                         bytecode = self._get_contract_bytecode(address)
@@ -472,7 +509,8 @@ class TransactionTraceAnalyzer:
                                 contract_data['decompile_error'] = 'Failed to fetch bytecode'
                             elif not self.decompile_enabled:
                                 contract_data['decompile_error'] = 'Decompilation disabled'
-                        
+
+                        self._save_contract_to_cache(address, contract_data)
                         return contract_data
 
                 # Common case: contract not verified / no source code
@@ -517,8 +555,9 @@ class TransactionTraceAnalyzer:
                         elif not self.decompile_enabled:
                             contract_data['decompile_error'] = 'Decompilation disabled'
 
+                    self._save_contract_to_cache(address, contract_data)
                     return contract_data
-            
+
             # Non-200 HTTP or unexpected response structure: treat as explorer API failure, still try to get bytecode
             bytecode = self._get_contract_bytecode(address)
             
@@ -558,9 +597,10 @@ class TransactionTraceAnalyzer:
                     contract_data['decompile_error'] = 'Failed to fetch bytecode'
                 elif not self.decompile_enabled:
                     contract_data['decompile_error'] = 'Decompilation disabled'
-            
+
+            self._save_contract_to_cache(address, contract_data)
             return contract_data
-            
+
         except Exception as e:
             print(f"Failed to fetch contract info for {address}: {e}")
             
