@@ -154,28 +154,33 @@ def main() -> int:
         processor = TransactionProcessor(log_dir=str(tx_log_dir))
         processor.process_transaction(tx)
 
-    # Export opcode
+    # Export opcode (skip if already cached from a previous run)
     paths = {}
     opcode_error: str = ""
     if not args.skip_opcode:
-        try:
-            opcode_dir = tx_dir / "opcode"
-            paths = analyzer.export_transaction_assembly(
-                tx,
-                out_dir=str(opcode_dir),
-                timeout=args.timeout,
-                include_json=True,
-                include_text=True,
-                disable_storage=True,
-                disable_stack=True,
-                disable_memory=True,
-                enable_return_data=True,
-                text_max_lines=None,
-                text_max_stack_items=8,
-            )
-        except Exception as e:
-            opcode_error = str(e)
-            print(f"Warning: opcode export failed (continuing with remaining artifacts): {opcode_error}")
+        opcode_dir = tx_dir / "opcode"
+        existing_opcodes = list(opcode_dir.glob("tx_assembly_*.json")) if opcode_dir.exists() else []
+        if existing_opcodes:
+            print(f"Opcode already cached ({len(existing_opcodes)} files), skipping debug_traceTransaction")
+            paths = {"json": str(existing_opcodes[0])}
+        else:
+            try:
+                paths = analyzer.export_transaction_assembly(
+                    tx,
+                    out_dir=str(opcode_dir),
+                    timeout=args.timeout,
+                    include_json=True,
+                    include_text=True,
+                    disable_storage=True,
+                    disable_stack=True,
+                    disable_memory=True,
+                    enable_return_data=True,
+                    text_max_lines=None,
+                    text_max_stack_items=8,
+                )
+            except Exception as e:
+                opcode_error = str(e)
+                print(f"Warning: opcode export failed (continuing with remaining artifacts): {opcode_error}")
 
     # selector -> signature mapping
     trace_resp_for_selectors = analyzer.get_transaction_trace(tx)
